@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Watir in Five Minutes</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="leanpub-main">
+<h2 id="watir-in-five-minutes">Watir in Five Minutes</h2>
+
+<p>
+  <em>You will need internet access if you want to follow examples in this chapter.</em>
+</p>
+
+<p>In this chapter I assume you have Ruby, RubyGems, watir-webdriver gem and Firefox browser installed, since that is the combination available on all operating systems. If you do not have them installed, please see <em>Installation</em> chapter.</p>
+
+<p><em>An example would be handy right about now</em> Brian Marick would say. Five minutes from now, you will be crazy about Watir. If not, maybe it is not the right tool for you. Even then, if you continue reading the book, I hope you will grow to like it the more you know about it.</p>
+
+<p>In the rest of the book, I will explain all Watir functionality in great (maybe even painful) detail, but for now, I just want to show off a few cool features to get you excited about it.</p>
+
+<p>I still remember how pleasantly surprised I was the first time I saw Watir at work. I installed it, and in a few hours I was able to create a script that would log me into the web application I was testing. Since you have this book you will be able to log into your web site in minutes, not hours.</p>
+
+<p>If you are familiar with Ruby, I am sure you already think IRB is one of the greatest tools for learning a new Ruby library.</p>
+
+<p>If you are new to Ruby, you are probably thinking: <em>What is this IRB thing?</em></p>
+
+<p>IRB (in this case) does not stand for <em>International Rugby Board</em> or <em>Immigration or Refugee Board (of Canada)</em>. It stands for <em>Interactive Ruby Shell</em>. Think of it as a shell that knows Ruby (as the name says).</p>
+
+<p>To start IRB, just type <code>irb</code> in command line. You will see something like this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">irb</code>
+<code class="lineno">2</code> <code class="o">&gt;</code>
+</pre></div>
+
+</div>
+
+<p>Now you can enter any Ruby command and you will immediately get a result. We will start with telling Ruby that we want to use watir-webdriver gem with <code>require "watir-webdriver"</code>:</p>
+
+<p>You should see something like this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno">2</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+</pre></div>
+
+</div>
+
+<p>If you get something like this, do not panic:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno">2</code> <code class="n">LoadError</code><code class="p">:</code> <code class="n">no</code> <code class="n">such</code> <code class="n">file</code> <code class="n">to</code> <code class="n">load</code> <code class="o">--</code> <code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>
+<code class="lineno">3</code> <code class="n">from</code> <code class="p">(</code><code class="n">irb</code><code class="p">):</code>1<code class="p">:</code><code class="n">in</code> `<code class="n">require</code><code class="o">'</code>
+<code class="lineno">4</code> <code class="n">from</code> <code class="p">(</code><code class="n">irb</code><code class="p">):</code>1
+</pre></div>
+
+</div>
+
+<p>It just means you have to require RubyGems first. In that case, do this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">rubygems</code>"
+<code class="lineno">2</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno">3</code> 
+<code class="lineno">4</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno">5</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+</pre></div>
+
+</div>
+
+<p>Every Ruby command returns something. After <code>require "rubygems"</code> you will get either <code>true</code> or <code>false</code>, depending how your Ruby installation is set up. You do not have to care about that right now. You should get <code>=&gt; true</code> after <code>require "watir-webdriver"</code>. There are two parts in the returned line. The first one is <code>=&gt;</code>. It looks like an arrow. It means <code>Ruby returned this</code>. The second part is <code>true</code>, the thing that is actually returned. When <code>true</code> is returned, it usually means that everything is fine.</p>
+
+<p>Unless I say differently, just ignore what is returned, for now.</p>
+
+<p>And now the magic starts. With just one command you will open Firefox.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">ff</code>
+</pre></div>
+
+</div>
+
+<div class="image-with-caption">
+  <p><img src="images/webdriver-firefox.png" alt="watir-webdriver driving Firefox 6 on Mac OS 10.6" /></p><p>watir-webdriver driving Firefox 6 on Mac OS 10.6</p>
+</div>
+
+<p>When I saw the browser magically appearing for the first time, I started singing (with apologies to <a href="http://www.youtube.com/watch?v=BrzzR-3PPqw">Foreigner</a>): <em>I&#x2019;ve been waiting for a tool like you to come into my life&#x2026;</em></p>
+
+<p>Please open just one browser. It will be enough. You can play with other browsers later.
+ Output should be similar to this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">ff</code>
+<code class="lineno">2</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">:</code>0<code class="n">x2ed1f1cd5b186306</code> <code class="n">url</code><code class="p">=</code>"<code class="n">about</code><code class="p">:</code><code class="n">blank</code>" <code class="n">title</code><code class="p">=</code>""<code class="o">&gt;</code>
+</pre></div>
+
+</div>
+
+<p>As I said earlier, you can ignore <code>#&lt;Watir::Browser...&gt;</code>. Opening Firefox returned the browser as an object, and this is textual representation of the object.</p>
+
+<p>Just opening a browser is cool, but not so useful. Watir can do much more. For example, it can navigate the browser to any site. I will use <em>google.com</em> in this example. I suggest that you literally follow the example, and then try a few sites yourself.</p>
+
+<p>So, go to <em>google.com</em>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">www</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>"
+<code class="lineno">2</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">www</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">hr</code><code class="o">/</code>"
+</pre></div>
+
+</div>
+
+<p>And <em>google.com opens</em>. Magic, isn&#x2019;t it?</p>
+
+<p>Controlling the browser is really useful but, as I am sure you already know, there is more to testing than just performing the actions. You have to check what happened after the action. What happens when I enter a URL in browser address bar, when I click a link or a button, when I enter some text in a text field or select something from select box&#x2026;?</p>
+
+<p>This is the first time we will perform a check. It is also the first time we will take a look what Ruby returns after the command. Let&#x2019;s check if the browser really opened <em>google.com</em>.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">url</code>
+<code class="lineno">2</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">www</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">hr</code><code class="o">/</code>"
+</pre></div>
+
+</div>
+
+<p>It really works! Ruby returned a string (the thing in double quotes) that contains the text from the browser address bar. Since I am in Croatia, <em>google.hr</em> opened. If you are not in the US, some other Google site could open.</p>
+
+<p>Time to click on a link. It is easy to explicitly say which link to click on. Right now I want to click on a link with the text <em>Google.com in English</em>. It gets just a bit more complicated if there are two links with the same text on the page, but we will deal with that later. If your browser already opened <em>google.com</em>, ignore this step.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">a</code><code class="p">(:</code><code class="n">text</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">Google</code><code class="p">.</code><code class="n">com</code> <code class="n">in</code> <code class="n">English</code>"<code class="p">).</code><code class="n">click</code>
+<code class="lineno">2</code> <code class="p">=</code><code class="o">&gt;</code> <code class="p">[]</code>
+</pre></div>
+
+</div>
+
+<p>And <em>google.com</em> opens.</p>
+
+<p>Before we click another link, I want to show off one of Watir&#x2019;s killer features. It is called <em>flash</em>. Real world web applications are complex, and sometimes when you are developing a new test or debugging an existing one, you want to make sure you are interacting with the correct element. Try this (and look at <em>Images</em> link in the top-left corner of <em>google.com</em>):</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">a</code><code class="p">(:</code><code class="n">text</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">Images</code>"<code class="p">).</code><code class="n">flash</code>
+<code class="lineno">2</code> <code class="p">=</code><code class="o">&gt;</code> 10
+</pre></div>
+
+</div>
+
+<div class="image-with-caption">
+  <p><img src="images/flash-1.png" alt="Link Images with normal background" /></p><p>Link Images with normal background</p>
+</div>
+
+<div class="image-with-caption">
+  <p><img src="images/flash-2.png" alt="Link Images with red background" /></p><p>Link Images with red background</p>
+</div>
+
+<p>
+  <em>Link Images changes background from white to red a few times.</em>
+</p>
+
+<p>Did you see the link flashing? It&#x2019;s background color changes to red a few times. Isn&#x2019;t that cool? I use it all the time when I talk about Watir (at conferences, for example). I think Watir is just great for presentations. It is very visual.</p>
+
+<p>If you did not see the flash (it flashes just for a short time), execute the command a few more times. To execute the same command in command prompt again, just click <em>up arrow</em> key on your keyboard and the last command that you have typed will appear.</p>
+
+<p>It is time to click the link:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">a</code><code class="p">(:</code><code class="n">text</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">Images</code>"<code class="p">).</code><code class="n">click</code>
+<code class="lineno">2</code> <code class="p">=</code><code class="o">&gt;</code> <code class="p">[]</code>
+</pre></div>
+
+</div>
+
+<p>This time, let&#x2019;s check the page title.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">title</code>
+<code class="lineno">2</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">Google</code> <code class="n">Images</code>"
+</pre></div>
+
+</div>
+
+<p>We got back the string with the page title.</p>
+
+<p>Let&#x2019;s search for something. This will enter <em>book</em> in search text field:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">text_field</code><code class="p">(:</code><code class="n">name</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">q</code>"<code class="p">).</code><code class="n">set</code> "<code class="n">book</code>"
+<code class="lineno">2</code> <code class="p">=</code><code class="o">&gt;</code> <code class="p">[</code>"<code class="n">book</code>"<code class="p">]</code>
+</pre></div>
+
+</div>
+
+<p>Maybe you are wondering how I knew the text field had the value of <em>name</em> attribute set to <em>q</em> (I am talking about <code>:name =&gt; "q"</code>). If you do not know how to inspect pages, read on. I will explain it later.</p>
+
+<p>Now, click <em>Search Images</em> button:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">button</code><code class="p">(:</code><code class="n">value</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">Search</code> <code class="n">Images</code>"<code class="p">).</code><code class="n">click</code>
+<code class="lineno">2</code> <code class="p">=</code><code class="o">&gt;</code> <code class="p">[]</code>
+</pre></div>
+
+</div>
+
+<p>Page with search results will open. Let&#x2019;s check how many images are on the page. (You might get a different number, it does not have to be 250.)</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">images</code><code class="p">.</code><code class="nb">size</code>
+<code class="lineno">2</code> <code class="p">=</code><code class="o">&gt;</code> 250
+</pre></div>
+
+</div>
+
+<p>And finally, let&#x2019;s close the browser.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">close</code>
+<code class="lineno">2</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+</pre></div>
+
+</div>
+
+<p>Well, that was a lot of fun. But you do not want to type into IRB all the time. You want to run the tests and do something else while it runs. As for almost everything else in Ruby and Watir, there is a simple solution. Paste all code you have entered in IRB in a text file, and save it with <em>rb</em> extension. IRB is used only for development or debugging, so do not paste <code>irb</code> as the first line of the file. The file should look like this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 2</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">ff</code>
+<code class="lineno"> 3</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">www</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>"
+<code class="lineno"> 4</code> <code class="n">browser</code><code class="p">.</code><code class="n">url</code>
+<code class="lineno"> 5</code> <code class="n">browser</code><code class="p">.</code><code class="n">a</code><code class="p">(:</code><code class="n">text</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">Google</code><code class="p">.</code><code class="n">com</code> <code class="n">in</code> <code class="n">English</code>"<code class="p">).</code><code class="n">click</code>
+<code class="lineno"> 6</code> <code class="n">browser</code><code class="p">.</code><code class="n">a</code><code class="p">(:</code><code class="n">text</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">Images</code>"<code class="p">).</code><code class="n">click</code>
+<code class="lineno"> 7</code> <code class="n">browser</code><code class="p">.</code><code class="n">title</code>
+<code class="lineno"> 8</code> <code class="n">browser</code><code class="p">.</code><code class="n">text_field</code><code class="p">(:</code><code class="n">name</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">q</code>"<code class="p">).</code><code class="n">set</code> "<code class="n">book</code>"
+<code class="lineno"> 9</code> <code class="n">browser</code><code class="p">.</code><code class="n">button</code><code class="p">(:</code><code class="n">value</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">Search</code> <code class="n">Images</code>"<code class="p">).</code><code class="n">click</code>
+<code class="lineno">10</code> <code class="n">browser</code><code class="p">.</code><code class="n">images</code><code class="p">.</code><code class="nb">size</code>
+<code class="lineno">11</code> <code class="n">browser</code><code class="p">.</code><code class="n">close</code>
+</pre></div>
+
+</div>
+
+<p>Add <code>require "rubygems"</code> at the top of the file if you had to type it in IRB.</p>
+
+<p>You can use any text editor to edit the file. I use <a href="http://www.jetbrains.com/ruby/">RubyMine</a> or <a href="http://netbeans.org/">NetBeans</a>.</p>
+
+<p>Save the file as <code>watir5.rb</code>. If IRB is still running in your command prompt, enter <code>exit</code> to return to normal command prompt, or open a new command prompt. You can remove clicking <code>Google.com in English</code> link if Firefox opens <em>google.com</em> automatically for you.</p>
+
+<p>To run the file, navigate in command prompt to the folder where you have saved it and run it with <code>ruby watir5.rb</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">ruby</code> <code class="n">watir5</code><code class="p">.</code><code class="n">rb</code>
+</pre></div>
+
+</div>
+
+<p>Smile while the browser clicks around.</p>
+
+<p>What is the output in the command prompt? Nothing? Yes, nothing. IRB displays values that Ruby returns, but when you execute Ruby file from the command line, it does not display the values Ruby returns. You have to explicitly say to Ruby that you want them displayed. It is as easy as adding <code>puts</code> in front of the command. Add <code>puts</code> in front of three lines. Modify the script to look like this. You can add puts in front of every command, but you really do not care about what some commands return:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 2</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">ff</code>
+<code class="lineno"> 3</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">www</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>"
+<code class="lineno"> 4</code> <code class="n">puts</code> <code class="n">browser</code><code class="p">.</code><code class="n">url</code>
+<code class="lineno"> 5</code> <code class="n">browser</code><code class="p">.</code><code class="n">a</code><code class="p">(:</code><code class="n">text</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">Google</code><code class="p">.</code><code class="n">com</code> <code class="n">in</code> <code class="n">English</code>"<code class="p">).</code><code class="n">click</code>
+<code class="lineno"> 6</code> <code class="n">browser</code><code class="p">.</code><code class="n">a</code><code class="p">(:</code><code class="n">text</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">Images</code>"<code class="p">).</code><code class="n">click</code>
+<code class="lineno"> 7</code> <code class="n">puts</code> <code class="n">browser</code><code class="p">.</code><code class="n">title</code>
+<code class="lineno"> 8</code> <code class="n">browser</code><code class="p">.</code><code class="n">text_field</code><code class="p">(:</code><code class="n">name</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">q</code>"<code class="p">).</code><code class="n">set</code> "<code class="n">book</code>"
+<code class="lineno"> 9</code> <code class="n">browser</code><code class="p">.</code><code class="n">button</code><code class="p">(:</code><code class="n">value</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">Search</code> <code class="n">Images</code>"<code class="p">).</code><code class="n">click</code>
+<code class="lineno">10</code> <code class="n">puts</code> <code class="n">browser</code><code class="p">.</code><code class="n">images</code><code class="p">.</code><code class="nb">size</code>
+<code class="lineno">11</code> <code class="n">browser</code><code class="p">.</code><code class="n">close</code>
+</pre></div>
+
+</div>
+
+<p>Run the script. This time the output should look like this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">ruby</code> <code class="n">watir5</code><code class="p">.</code><code class="n">rb</code>
+<code class="lineno">2</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">www</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">hr</code><code class="o">/</code>
+<code class="lineno">3</code> <code class="n">Google</code> <code class="n">Images</code>
+<code class="lineno">4</code> 246
+</pre></div>
+
+</div>
+
+<p>Later I will show you how to make cool looking reports.</p>
+
+<p>If you are not impressed by now, you probably never will. If you liked what you saw so far, it is time to bring on heavy artillery. Let&#x2019;s go deeper.</p>
+</div>
+<div id="leanpub-toc">
+<h2>Table of Contents</h2>
+<ol class="toc">
+<li class="chapter"><a href="chap00.html#license">License</a></li>
+<li class="chapter"><a href="chap01.html#about-the-book">About the Book</a></li>
+<li class="chapter"><a href="chap02.html#prerequisites">Prerequisites</a></li>
+<li class="chapter"><a href="chap03.html#about-watir">About Watir</a></li>
+<li class="section"><a href="chap03.html#what-can-it-do">What can it do?</a></li>
+<li class="section"><a href="chap03.html#what-it-can-not-do">What it can not do?</a></li>
+<li class="section"><a href="chap03.html#recorders">Recorders</a></li>
+<li class="section"><a href="chap03.html#gems">Gems</a></li>
+<li class="section"><a href="chap03.html#alternatives">Alternatives</a></li>
+<li class="chapter"><a href="chap04.html#installation">Installation</a></li>
+<li class="section"><a href="chap04.html#windows-7-vista-and-xp">Windows 7, Vista and XP</a></li>
+<li class="section"><a href="chap04.html#mac-os-x-108-107-106-and-105">Mac OS X 10.8, 10.7, 10.6 and 10.5</a></li>
+<li class="section"><a href="chap04.html#ubuntu-linux-1104">Ubuntu Linux 11.04</a></li>
+<li class="chapter"><a href="chap05.html#watir-in-five-minutes">Watir in Five Minutes</a></li>
+<li class="chapter"><a href="chap06.html#html-elements-supported-by-watir">HTML Elements Supported by Watir</a></li>
+<li class="chapter"><a href="chap07.html#link">Link</a></li>
+<li class="section"><a href="chap07.html#html-tag">HTML tag</a></li>
+<li class="section"><a href="chap07.html#text">Text</a></li>
+<li class="section"><a href="chap07.html#href">Href</a></li>
+<li class="section"><a href="chap07.html#url">URL</a></li>
+<li class="section"><a href="chap07.html#id">ID</a></li>
+<li class="section"><a href="chap07.html#name">Name</a></li>
+<li class="section"><a href="chap07.html#class">Class</a></li>
+<li class="section"><a href="chap07.html#title">Title</a></li>
+<li class="section"><a href="chap07.html#index">Index</a></li>
+<li class="section"><a href="chap07.html#after">After</a></li>
+<li class="section"><a href="chap07.html#html">HTML</a></li>
+<li class="section"><a href="chap07.html#css">CSS</a></li>
+<li class="section"><a href="chap07.html#xpath">XPath</a></li>
+<li class="section"><a href="chap07.html#multiple-attributes">Multiple Attributes</a></li>
+<li class="section"><a href="chap07.html#collection">Collection</a></li>
+<li class="chapter"><a href="chap08.html#img">Img</a></li>
+<li class="section"><a href="chap08.html#src">Src</a></li>
+<li class="section"><a href="chap08.html#alt">Alt</a></li>
+<li class="chapter"><a href="chap09.html#button">Button</a></li>
+<li class="chapter"><a href="chap10.html#checkbox">Checkbox</a></li>
+<li class="section"><a href="chap10.html#click">Click</a></li>
+<li class="section"><a href="chap10.html#set">Set</a></li>
+<li class="section"><a href="chap10.html#clear">Clear</a></li>
+<li class="chapter"><a href="chap11.html#radio">Radio</a></li>
+<li class="section"><a href="chap11.html#click-1">Click</a></li>
+<li class="section"><a href="chap11.html#set-1">Set</a></li>
+<li class="section"><a href="chap11.html#clear-1">Clear</a></li>
+<li class="chapter"><a href="chap12.html#collections">Collections</a></li>
+<li class="chapter"><a href="chap13.html#nested-elements">Nested Elements</a></li>
+<li class="section"><a href="chap13.html#simple-nesting">Simple Nesting</a></li>
+<li class="section"><a href="chap13.html#more-nesting">More nesting</a></li>
+<li class="chapter"><a href="chap14.html#about-watir-extended-version">About Watir, Extended Version</a></li>
+<li class="section"><a href="chap14.html#history">History</a></li>
+<li class="section"><a href="chap14.html#today">Today</a></li>
+<li class="section"><a href="chap14.html#future">Future</a></li>
+</ol>
+</div>
+</body>
+</html>

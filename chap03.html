@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>About Watir</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="leanpub-main">
+<h2 id="about-watir">About Watir</h2>
+
+<div class="image-with-caption">
+  <p><img src="images/watir-logo.jpg" alt="Watir Logo" /></p><p>Watir Logo</p>
+</div>
+
+<p>What is this thing Watir, that I have decided to write a book about?</p>
+
+<p>Bret Pettichord (Watir co-creator) would say that it is family of Ruby libraries that drive browsers. A bit more verbose: Watir project is a collection of open source tools (RubyGems) that drive browsers and help you automate boring and repetitive parts of functional testing of web applications, so you have more time to test with your brain.</p>
+
+<p>Watir is pronounced <em>water</em>, and it stands for Web Application Testing in Ruby. It is implemented in Ruby, programming language. You have probably heard about web framework Ruby on Rails. Rails is also implemented in Ruby. Both Ruby and Watir (and Rails) are <a href="http://en.wikipedia.org/wiki/Open_source">open source</a> projects. If you do not know what open source is, all you need to know fow now is that you do not have to pay anything to use it. Really, anything.</p>
+
+<p>Today Watir can drive Microsoft Internet Explorer, Mozilla Firefox, Apple Safari, Google Chrome and Opera. Watir works on all major operating systems: Microsoft Windows, Apple Mac OS X and Linux.</p>
+
+<p>The fact that Watir is implemented in Ruby does not mean that it can only drive web applications written in Ruby. Since Watir gems drive browsers, it does not matter at all which operating system (Windows, Linux, Mac&#x2026;), programming language (C#, Java, PHP, Ruby&#x2026;) or framework your web applications uses.</p>
+
+<p>Since Watir is &#x201C;just&#x201D; a family of Ruby libraries, that means Watir code is in fact Ruby code. Why is that important? Because it means you have full access to all nice Ruby features in your tests. It also means that if you need to access databases, read or write Excel files (or any other file type), send or receive mail, you can do it from your scripts. Watir can not do all that stuff, but that functionality is either included in Ruby (reading or writing to files, for example) or there are Ruby gems that cover that functionality (databases, Excel files, sending or receiving mail&#x2026;).</p>
+
+<h3 id="what-can-it-do">What can it do?</h3>
+
+<p>Watir can do almost anything that user can manually do with the browser. Open a page, click a link, button, radio button, checkbox, enter text in a text field&#x2026; Of course, just driving the browser does not mean it is useful for testing. It can also inspect the page currently opened in the browser. For example it can tell you the URL from the address bar, page title, list all links from the page, or just specific set of links (that have text &#x201C;click&#x201D;, for example), or just one link (that has id &#x201C;link1&#x201D;, for example)&#x2026; Is a checkbox present on the page, is the radio button visible, what text is entered in the text field&#x2026;</p>
+
+<h3 id="what-it-can-not-do">What it can not do?</h3>
+
+<p>It is important to say that Watir CAN NOT control browser plugins like Java applets, Adobe Flash or Microsoft Silverlight. There are open source projects that can control some browser plugins.</p>
+
+<h3 id="recorders">Recorders</h3>
+
+<p>Let&#x2019;s make it explicit at the very beginning of the book. Watir project does not have a recorder. You will even find that Watir community does not like recorders. <strong>Really</strong> does not like recorders. There are a few recorders available that will create Watir code, but none of them does a great job, and therefore none of them is included in the Watir project. If you are using a recorder and you have a problem, the problem is most likely in the recorder, and not in Watir. Please report all such problems to the recorder support forum or mailing list.</p>
+
+<h3 id="gems">Gems</h3>
+
+<p>Software written in Ruby is usually distributed as RubyGems file. You can just call it a gem. Watir project is consisted of a few gems.</p>
+
+<p>The project started with watir gem (the whole project was named after it). It can only drive Internet Explorer on Windows. At the moment it is the best Internet Explorer driver. If you need to drive Internet Explorer, I would recommend watir gem.</p>
+
+<p>The next gem that appeared was firewatir. It runs on Windows, Mac and Linux and drives Firefox, but only up to Firefox 3.6, so if you need to run Firefox 4 or newer, you can not use it. The gem is deprecated since Watir 2.0. If you want to drive Firefox, use watir-webdriver gem.</p>
+
+<p>After it came safariwatir. It drives Safari, but only on Mac. There is no Windows version. Safariwatir works, but it is not in active development. There is a chance that watir-webdriver will be able to drive Safari soon. If you need to drive Safari on Mac, safariwatir is your only choice. If you need to drive Safari on Windows, you are out of luck.</p>
+
+<p>For a short period of time, there was chromewatir gem. It was able to drive Chrome, but only on Windows, I think. It was back in the day when Chrome was available only on Windows. It does not work with the recent Chrome releases. If you want to drive Chrome, use watir-webdriver gem.</p>
+
+<p>Celerity is the only gem that does not drive a real browser, but it emulates one. That means it is way faster but does not use your application in a way a real user would. At the moment, celerity works but it is not in active development. If you want your test to run faster, I think it would be better to drive a few headless Firefox instances. For even more speed, use more than one machine to run the tests.</p>
+
+<p>Watir-webdriver gem is new and shiny. It uses WebDriver (part of Selenium project) to drive browsers. It works on Windows, Mac and Linux and can drive Internet Explorer, Firefox, Chrome and Opera. If you want to drive any of the supported browsers, I would recommend this gem. The only exception is Internet Explorer. I think watir gem has better support for it.</p>
+
+<p>Operawatir is the newest gem. It is developed by Opera Software, the same company that develops Opera browser. It works on Windows, Mac and Linux and can drive Opera. It needs JRuby to run, so it complicates installation a bit. If you already have Ruby MRI installed and you want to drive Opera, I would recommend watir-webdriver gem.</p>
+
+<p>In short: if you want to drive Internet Explorer, use watir gem; if you want to drive Safari, use safariwatir gem; if you want to drive Firefox, Chrome or Opera, use watir-webdriver gem.</p>
+
+<h3 id="alternatives">Alternatives</h3>
+
+<p>If you like the idea of testing web applications by driving real browsers, but for some reason just can not use Ruby (or you do not want to), I have good news. The success of Watir project has inspired people to create similar projects using different programming languages:</p>
+
+<ul><li>WatiN, .NET Framework, http://watin.org/</li>
+  <li>Watij, Java, http://watij.com/</li>
+  <li>Win32-Watir, Perl, http://search.cpan.org/dist/Win32-Watir/</li>
+  <li>win-control, Gambit (Lisp/Scheme), http://code.google.com/p/win-control/</li>
+</ul><p>WatiN and Watij are active projects. If you would prefer to drive browsers with .NET or Java, I would recommend them.</p>
+
+<p>I have tried to contact authors of Win32-Watir and win-control, but did not get any response, so I could not recommend them.</p>
+
+<p>Another popular tool for driving browsers is Selenium (http://seleniumhq.org/). Watir-webdriver uses WebDriver (part of Selenium project) to drive browsers, so Selenium and Watir communities are now closer than ever.</p>
+</div>
+<div id="leanpub-toc">
+<h2>Table of Contents</h2>
+<ol class="toc">
+<li class="chapter"><a href="chap00.html#license">License</a></li>
+<li class="chapter"><a href="chap01.html#about-the-book">About the Book</a></li>
+<li class="chapter"><a href="chap02.html#prerequisites">Prerequisites</a></li>
+<li class="chapter"><a href="chap03.html#about-watir">About Watir</a></li>
+<li class="section"><a href="chap03.html#what-can-it-do">What can it do?</a></li>
+<li class="section"><a href="chap03.html#what-it-can-not-do">What it can not do?</a></li>
+<li class="section"><a href="chap03.html#recorders">Recorders</a></li>
+<li class="section"><a href="chap03.html#gems">Gems</a></li>
+<li class="section"><a href="chap03.html#alternatives">Alternatives</a></li>
+<li class="chapter"><a href="chap04.html#installation">Installation</a></li>
+<li class="section"><a href="chap04.html#windows-7-vista-and-xp">Windows 7, Vista and XP</a></li>
+<li class="section"><a href="chap04.html#mac-os-x-108-107-106-and-105">Mac OS X 10.8, 10.7, 10.6 and 10.5</a></li>
+<li class="section"><a href="chap04.html#ubuntu-linux-1104">Ubuntu Linux 11.04</a></li>
+<li class="chapter"><a href="chap05.html#watir-in-five-minutes">Watir in Five Minutes</a></li>
+<li class="chapter"><a href="chap06.html#html-elements-supported-by-watir">HTML Elements Supported by Watir</a></li>
+<li class="chapter"><a href="chap07.html#link">Link</a></li>
+<li class="section"><a href="chap07.html#html-tag">HTML tag</a></li>
+<li class="section"><a href="chap07.html#text">Text</a></li>
+<li class="section"><a href="chap07.html#href">Href</a></li>
+<li class="section"><a href="chap07.html#url">URL</a></li>
+<li class="section"><a href="chap07.html#id">ID</a></li>
+<li class="section"><a href="chap07.html#name">Name</a></li>
+<li class="section"><a href="chap07.html#class">Class</a></li>
+<li class="section"><a href="chap07.html#title">Title</a></li>
+<li class="section"><a href="chap07.html#index">Index</a></li>
+<li class="section"><a href="chap07.html#after">After</a></li>
+<li class="section"><a href="chap07.html#html">HTML</a></li>
+<li class="section"><a href="chap07.html#css">CSS</a></li>
+<li class="section"><a href="chap07.html#xpath">XPath</a></li>
+<li class="section"><a href="chap07.html#multiple-attributes">Multiple Attributes</a></li>
+<li class="section"><a href="chap07.html#collection">Collection</a></li>
+<li class="chapter"><a href="chap08.html#img">Img</a></li>
+<li class="section"><a href="chap08.html#src">Src</a></li>
+<li class="section"><a href="chap08.html#alt">Alt</a></li>
+<li class="chapter"><a href="chap09.html#button">Button</a></li>
+<li class="chapter"><a href="chap10.html#checkbox">Checkbox</a></li>
+<li class="section"><a href="chap10.html#click">Click</a></li>
+<li class="section"><a href="chap10.html#set">Set</a></li>
+<li class="section"><a href="chap10.html#clear">Clear</a></li>
+<li class="chapter"><a href="chap11.html#radio">Radio</a></li>
+<li class="section"><a href="chap11.html#click-1">Click</a></li>
+<li class="section"><a href="chap11.html#set-1">Set</a></li>
+<li class="section"><a href="chap11.html#clear-1">Clear</a></li>
+<li class="chapter"><a href="chap12.html#collections">Collections</a></li>
+<li class="chapter"><a href="chap13.html#nested-elements">Nested Elements</a></li>
+<li class="section"><a href="chap13.html#simple-nesting">Simple Nesting</a></li>
+<li class="section"><a href="chap13.html#more-nesting">More nesting</a></li>
+<li class="chapter"><a href="chap14.html#about-watir-extended-version">About Watir, Extended Version</a></li>
+<li class="section"><a href="chap14.html#history">History</a></li>
+<li class="section"><a href="chap14.html#today">Today</a></li>
+<li class="section"><a href="chap14.html#future">Future</a></li>
+</ol>
+</div>
+</body>
+</html>

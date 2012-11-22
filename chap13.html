@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Nested Elements</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="leanpub-main">
+<h2 id="nested-elements">Nested Elements</h2>
+
+<h3 id="simple-nesting">Simple Nesting</h3>
+
+<p>Sometimes the only way to uniquely identify a link is to specify one or more of its parent elements. How would you click the second link in this example?</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="nt">&lt;div</code> <code class="na">id=</code><code class="s">"one"</code><code class="nt">&gt;</code>
+<code class="lineno">2</code>   <code class="nt">&lt;a</code> <code class="na">href=</code><code class="s">"clicked.htm"</code><code class="nt">&gt;</code>click me<code class="nt">&lt;/a&gt;</code>
+<code class="lineno">3</code> <code class="nt">&lt;/div&gt;</code>
+<code class="lineno">4</code> <code class="nt">&lt;div</code> <code class="na">id=</code><code class="s">"two"</code><code class="nt">&gt;</code>
+<code class="lineno">5</code>   <code class="nt">&lt;a</code> <code class="na">href=</code><code class="s">"clicked.htm"</code><code class="nt">&gt;</code>click me<code class="nt">&lt;/a&gt;</code>
+<code class="lineno">6</code> <code class="nt">&lt;/div&gt;</code>
+</pre></div>
+
+</div>
+
+<p>This will click on the first link, but we want to click on the second one:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">browser</code><code class="p">.</code><code class="n">a</code><code class="p">(:</code><code class="n">text</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">click</code> <code class="n">me</code>"<code class="p">).</code><code class="n">click</code>
+</pre></div>
+
+</div>
+
+<p>This will work, but it is really fragile:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">browser</code><code class="p">.</code><code class="n">a</code><code class="p">(:</code><code class="n">index</code> <code class="p">=</code><code class="o">&gt;</code> 1<code class="p">).</code><code class="n">click</code>
+</pre></div>
+
+</div>
+
+<p>If in further development a link (or more) is added between the two links we have so far, the code above will click on whatever link was the second, and that is not what we want.</p>
+
+<p>Let&#x2019;s make it less fragile.</p>
+
+<p>We know that the second link is a child element of a <code>div</code> with an <code>id</code> attribute. This is the solution to the problem:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">browser</code><code class="p">.</code><code class="n">div</code><code class="p">(:</code><code class="n">id</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">two</code>"<code class="p">).</code><code class="n">link</code><code class="p">(:</code><code class="n">text</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">click</code> <code class="n">me</code>"<code class="p">).</code><code class="n">click</code>
+</pre></div>
+
+</div>
+
+<p>Isn&#x2019;t that just so elegant?! Read it. First there is a browser, inside it there is the div, and inside the div is our link.</p>
+
+<p>The above solution is not the only one. This will work too:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">browser</code><code class="p">.</code><code class="n">div</code><code class="p">(:</code><code class="n">id</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">two</code>"<code class="p">).</code><code class="n">link</code><code class="p">(:</code><code class="n">index</code> <code class="p">=</code><code class="o">&gt;</code> 0<code class="p">).</code><code class="n">click</code>
+</pre></div>
+
+</div>
+
+<p>This time we told Watir that we want it to click the first link in a specific div.</p>
+
+<p>There are endless options how to click on an element on a page, and this book will try to teach you all of them.</p>
+
+<h3 id="more-nesting">More nesting</h3>
+
+<p>If for some reason you want to be very specific about where the element is located in the page, Watir can handle that too. For example, if you had something like this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="nt">&lt;div</code> <code class="na">id=</code><code class="s">"one"</code><code class="nt">&gt;</code>
+<code class="lineno">2</code>   <code class="nt">&lt;div</code> <code class="na">id=</code><code class="s">"two"</code><code class="nt">&gt;</code>
+<code class="lineno">3</code>     <code class="nt">&lt;a</code> <code class="na">href=</code><code class="s">"clicked.htm"</code><code class="nt">&gt;</code>click me<code class="nt">&lt;/a&gt;</code>
+<code class="lineno">4</code>   <code class="nt">&lt;/div&gt;</code>
+<code class="lineno">5</code> <code class="nt">&lt;/div&gt;</code>
+</pre></div>
+
+</div>
+
+<p>You could click the link with:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">browser</code><code class="p">.</code><code class="n">div</code><code class="p">(:</code><code class="n">id</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">one</code>"<code class="p">).</code><code class="n">div</code><code class="p">(:</code><code class="n">id</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">two</code>"<code class="p">).</code><code class="n">link</code><code class="p">(:</code><code class="n">text</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">click</code> <code class="n">me</code>"<code class="p">).</code><code class="n">click</code>
+</pre></div>
+
+</div>
+
+<p>So, there is a browser, then a div, another div and the link we are looking for.</p>
+
+<p>The nesting can go as deep as you like.</p>
+</div>
+<div id="leanpub-toc">
+<h2>Table of Contents</h2>
+<ol class="toc">
+<li class="chapter"><a href="chap00.html#license">License</a></li>
+<li class="chapter"><a href="chap01.html#about-the-book">About the Book</a></li>
+<li class="chapter"><a href="chap02.html#prerequisites">Prerequisites</a></li>
+<li class="chapter"><a href="chap03.html#about-watir">About Watir</a></li>
+<li class="section"><a href="chap03.html#what-can-it-do">What can it do?</a></li>
+<li class="section"><a href="chap03.html#what-it-can-not-do">What it can not do?</a></li>
+<li class="section"><a href="chap03.html#recorders">Recorders</a></li>
+<li class="section"><a href="chap03.html#gems">Gems</a></li>
+<li class="section"><a href="chap03.html#alternatives">Alternatives</a></li>
+<li class="chapter"><a href="chap04.html#installation">Installation</a></li>
+<li class="section"><a href="chap04.html#windows-7-vista-and-xp">Windows 7, Vista and XP</a></li>
+<li class="section"><a href="chap04.html#mac-os-x-108-107-106-and-105">Mac OS X 10.8, 10.7, 10.6 and 10.5</a></li>
+<li class="section"><a href="chap04.html#ubuntu-linux-1104">Ubuntu Linux 11.04</a></li>
+<li class="chapter"><a href="chap05.html#watir-in-five-minutes">Watir in Five Minutes</a></li>
+<li class="chapter"><a href="chap06.html#html-elements-supported-by-watir">HTML Elements Supported by Watir</a></li>
+<li class="chapter"><a href="chap07.html#link">Link</a></li>
+<li class="section"><a href="chap07.html#html-tag">HTML tag</a></li>
+<li class="section"><a href="chap07.html#text">Text</a></li>
+<li class="section"><a href="chap07.html#href">Href</a></li>
+<li class="section"><a href="chap07.html#url">URL</a></li>
+<li class="section"><a href="chap07.html#id">ID</a></li>
+<li class="section"><a href="chap07.html#name">Name</a></li>
+<li class="section"><a href="chap07.html#class">Class</a></li>
+<li class="section"><a href="chap07.html#title">Title</a></li>
+<li class="section"><a href="chap07.html#index">Index</a></li>
+<li class="section"><a href="chap07.html#after">After</a></li>
+<li class="section"><a href="chap07.html#html">HTML</a></li>
+<li class="section"><a href="chap07.html#css">CSS</a></li>
+<li class="section"><a href="chap07.html#xpath">XPath</a></li>
+<li class="section"><a href="chap07.html#multiple-attributes">Multiple Attributes</a></li>
+<li class="section"><a href="chap07.html#collection">Collection</a></li>
+<li class="chapter"><a href="chap08.html#img">Img</a></li>
+<li class="section"><a href="chap08.html#src">Src</a></li>
+<li class="section"><a href="chap08.html#alt">Alt</a></li>
+<li class="chapter"><a href="chap09.html#button">Button</a></li>
+<li class="chapter"><a href="chap10.html#checkbox">Checkbox</a></li>
+<li class="section"><a href="chap10.html#click">Click</a></li>
+<li class="section"><a href="chap10.html#set">Set</a></li>
+<li class="section"><a href="chap10.html#clear">Clear</a></li>
+<li class="chapter"><a href="chap11.html#radio">Radio</a></li>
+<li class="section"><a href="chap11.html#click-1">Click</a></li>
+<li class="section"><a href="chap11.html#set-1">Set</a></li>
+<li class="section"><a href="chap11.html#clear-1">Clear</a></li>
+<li class="chapter"><a href="chap12.html#collections">Collections</a></li>
+<li class="chapter"><a href="chap13.html#nested-elements">Nested Elements</a></li>
+<li class="section"><a href="chap13.html#simple-nesting">Simple Nesting</a></li>
+<li class="section"><a href="chap13.html#more-nesting">More nesting</a></li>
+<li class="chapter"><a href="chap14.html#about-watir-extended-version">About Watir, Extended Version</a></li>
+<li class="section"><a href="chap14.html#history">History</a></li>
+<li class="section"><a href="chap14.html#today">Today</a></li>
+<li class="section"><a href="chap14.html#future">Future</a></li>
+</ol>
+</div>
+</body>
+</html>

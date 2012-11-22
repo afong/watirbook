@@ -1,0 +1,1496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Installation</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="leanpub-main">
+<h2 id="installation">Installation</h2>
+
+<p>Installation is not complicated, but unfortunately, it is not trivial either.</p>
+
+<p>I have already said that Watir is &#x201C;just&#x201D; a piece of software written in Ruby, so to install it, you have to install Ruby first. Since both Ruby and Watir are available on Windows, Mac and Linux and each of them has several releases currently in use (or in case of Linux, both distributions and releases), I will cover what I think is the relevant ones. I will use the most recent stable Ruby release, 1.9.2.</p>
+
+<p>I am installing everything in VMware Fusion 3.1.3 virtual machines, except Mac OS, since it does not want to be virtualized. Host OS for VMware Fusion is Mac OS X 10.6.8.</p>
+
+<p>You will probably be bored to tears if you read all installation chapters. A lot of stuff is repeated. I suggest that you read only the chapters you need. Feel free to read the rest of the book in the whole.</p>
+
+<h3 id="windows-7-vista-and-xp">Windows 7, Vista and XP</h3>
+
+<p>
+  <em>You will need internet access if you want to follow examples in this chapter.</em>
+</p>
+
+<div class="image-with-caption">
+  <p><img src="images/desktop.png" alt="Windows 7 default desktop" /></p><p>Windows 7 default desktop</p>
+</div>
+
+<p>Machine is a clean installation of:</p>
+
+<ul><li>Microsoft Windows 7 Professional 32-bit, Service Pack 1,</li>
+  <li>Microsoft Windows Vista Ultimate 32-bit, Service Pack 1,</li>
+  <li>Microsoft Windows XP Professional, Version 2002, Service Pack 3.</li>
+</ul><p>Windows 7 and Vista machines have 1 GB RAM, XP has 512 MB. All machines are fully patched, including Internet Explorer 9 on Windows 7 and Vista. I left Internet Explorer on version 6 at XP machine, just for fun.</p>
+
+<p>I did not notice any difference in installing or using Watir on any version on Windows, so I have decided to put them in one chapter.</p>
+
+<h4 id="ruby">Ruby</h4>
+
+<p>You probably do not have Ruby installed. To make sure, open command prompt and type <code>ruby -v</code>. On 7 and Vista open command prompt with <em>Start &gt; Search programs and files &gt; cmd &gt; Enter</em>, and on XP with <em>Start &gt; Run&#x2026; &gt; cmd &gt; Enter</em>.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code><code class="n">ruby</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> <code class="s">'ruby'</code> <code class="n">is</code> <code class="n">not</code> <code class="n">recognized</code> <code class="n">as</code> <code class="n">an</code> <code class="n">internal</code> <code class="n">or</code> <code class="n">external</code> <code class="n">command</code><code class="p">,</code>
+<code class="lineno">3</code> <code class="n">operable</code> <code class="n">program</code> <code class="n">or</code> <code class="n">batch</code> <code class="n">file</code><code class="p">.</code>
+</pre></div>
+
+</div>
+
+<p>If you get the same thing as I did, you do not have Ruby installed.</p>
+
+<p>Download the latest Ruby 1.9. from <em><a href="http://rubyinstaller.org/downloads">rubyinstaller.org/downloads</a></em>. At the moment it is <em>Ruby 1.9.3-p0</em>. Execute the file.</p>
+
+<div class="image-with-caption">
+  <p><img src="images/ruby.png" alt="Ruby Installation" /></p><p>Ruby Installation</p>
+</div>
+
+<p>You can leave all settings at default values, except at the <em>Installation Destination and Optional Tasks</em> screen check both <em>Add Ruby executables to your PATH</em> and <em>Associate .rb and .rbw files with this Ruby installation</em> checkboxes. Installation should take you just a few seconds.</p>
+
+<p>Let&#x2019;s check if Ruby is installed. You will have to open another command prompt, because the one you have opened does not see Ruby.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code><code class="n">ruby</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> <code class="n">ruby</code> 1<code class="p">.</code>9<code class="p">.</code>3<code class="n">p0</code> <code class="p">(</code>2011<code class="o">-</code>10<code class="o">-</code>30<code class="p">)</code> <code class="p">[</code><code class="n">i386</code><code class="o">-</code><code class="n">mingw32</code><code class="p">]</code>
+</pre></div>
+
+</div>
+
+<p>Congratulations! You now have the latest and greatest Ruby, 1.9.3!</p>
+
+<h4 id="rubygems">RubyGems</h4>
+
+<p>Software written in Ruby is usually distributed as RubyGems (colloquial name is <em>gem</em>), Ruby package manager. Sometimes Ruby installations do not have the latest versions of RubyGems, so we will first update it. RubyGems is also a gem, (a bit recursive, right?) and we get it&#x2019;s version with <code>gem -v</code>.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code><code class="n">gem</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> 1<code class="p">.</code>8<code class="p">.</code>11
+</pre></div>
+
+</div>
+
+<p>You should update it with <code>gem update --system</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code><code class="n">gem</code> <code class="n">update</code> <code class="o">--</code><code class="n">system</code>
+<code class="lineno">2</code> <code class="p">(...)</code>
+<code class="lineno">3</code> <code class="n">RubyGems</code> <code class="n">system</code> <code class="n">software</code> <code class="n">updated</code>
+</pre></div>
+
+</div>
+
+<p>Ask RubyGems again for it&#x2019;s version, just to make sure:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code><code class="n">gem</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> 1<code class="p">.</code>8<code class="p">.</code>12
+</pre></div>
+
+</div>
+
+<h4 id="devkit">DevKit</h4>
+
+<p>Watir and watir-webdriver gems needs <code>ffi</code> gem, and it needs RubyInstaller Development Kit (DevKit) . Do not worry, it is not complicated as it sounds. If you do not have DevKit installed, you will get this error message while installing watir or watir-webdriver gems:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">Fetching</code><code class="o">:</code> <code class="n">ffi</code><code class="o">-</code><code class="mf">1.0</code><code class="o">.</code><code class="mi">11</code><code class="o">.</code><code class="na">gem</code> <code class="o">(</code><code class="mi">100</code><code class="o">%)</code>
+<code class="lineno">2</code> <code class="n">ERROR</code><code class="o">:</code>  <code class="n">Error</code> <code class="n">installing</code> <code class="n">watir</code><code class="o">:</code>
+<code class="lineno">3</code> <code class="n">The</code> <code class="s1">'ffi'</code> <code class="kd">native</code> <code class="n">gem</code> <code class="n">requires</code> <code class="n">installed</code> <code class="n">build</code> <code class="n">tools</code><code class="o">.</code>
+<code class="lineno">4</code> 
+<code class="lineno">5</code> <code class="n">Please</code> <code class="n">update</code> <code class="n">your</code> <code class="n">PATH</code> <code class="n">to</code> <code class="k">include</code> <code class="n">build</code> <code class="n">tools</code> <code class="n">or</code> <code class="n">download</code> <code class="n">the</code> <code class="n">DevKit</code>
+<code class="lineno">6</code> <code class="n">from</code> <code class="s1">'http://rubyinstaller.org/downloads'</code> <code class="n">and</code> <code class="n">follow</code> <code class="n">the</code> <code class="n">instructions</code>
+<code class="lineno">7</code> <code class="n">at</code> <code class="s1">'http://github.com/oneclick/rubyinstaller/wiki/Development-Kit'</code>
+</pre></div>
+
+</div>
+
+<p>The solution is easy. Go to http://rubyinstaller.org/downloads and download the latest version of DevKit. At the moment it is DevKit-tdm-32-4.5.2-20110712-1620-sfx.exe. Execute the file. It tried to install in the folder where the file was located, in my case it was <code>C:\Documents and Settings\zeljko\Desktop\</code>. The documentation says spaces in path could cause trouble, as is often the case. Install it to <code>C:\devkit</code>. It will actually just extract itself there and DevKit window will disappear. There will be no <em>Installation OK</em> popup.</p>
+
+<div class="image-with-caption">
+  <p><img src="images/devkit-folder.png" alt="Where to extract DevKit" /></p><p>Where to extract DevKit</p>
+</div>
+
+<div class="image-with-caption">
+  <p><img src="images/devkit-extracting.png" alt="DevKit extracting" /></p><p>DevKit extracting</p>
+</div>
+
+<p>Go to <code>C:\devkit</code> in command prompt and type <code>ruby dk.rb init</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">C</code><code class="p">:</code><code class="o">\</code><code class="n">devkit</code><code class="o">&gt;</code><code class="n">ruby</code> <code class="n">dk</code><code class="p">.</code><code class="n">rb</code> <code class="n">init</code>
+<code class="lineno">2</code> <code class="p">[</code><code class="n">INFO</code><code class="p">]</code> <code class="n">found</code> <code class="n">RubyInstaller</code> <code class="n">v1</code><code class="p">.</code>9<code class="p">.</code>3 <code class="n">at</code> <code class="n">C</code><code class="p">:</code><code class="o">/</code><code class="n">Ruby193</code>
+<code class="lineno">3</code> 
+<code class="lineno">4</code> <code class="n">Initialization</code> <code class="n">complete</code>! <code class="n">Please</code> <code class="n">review</code> <code class="n">and</code> <code class="n">modify</code> <code class="n">the</code> <code class="n">auto</code><code class="o">-</code><code class="n">generated</code>
+<code class="lineno">5</code> <code class="s">'config.yml'</code> <code class="n">file</code> <code class="n">to</code> <code class="n">ensure</code> <code class="n">it</code> <code class="n">contains</code> <code class="n">the</code> <code class="n">root</code> <code class="n">directories</code> <code class="n">to</code> <code class="n">all</code>
+<code class="lineno">6</code> <code class="n">of</code> <code class="n">the</code> <code class="n">installed</code> <code class="n">Rubies</code> <code class="n">you</code> <code class="n">want</code> <code class="n">enhanced</code> <code class="n">by</code> <code class="n">the</code> <code class="n">DevKit</code><code class="p">.</code>
+</pre></div>
+
+</div>
+
+<p>And the final step is <code>ruby dk.rb install</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">C</code><code class="p">:</code><code class="o">\</code><code class="n">devkit</code><code class="o">&gt;</code><code class="n">ruby</code> <code class="n">dk</code><code class="p">.</code><code class="n">rb</code> <code class="n">install</code>
+<code class="lineno">2</code> <code class="p">[</code><code class="n">INFO</code><code class="p">]</code> <code class="n">Installing</code> <code class="s">'C:/Ruby193/lib/ruby/</code>
+<code class="lineno">3</code> <code class="s">  site_ruby/1.9.1/rubygems/defaults/operating_system.rb'</code>
+<code class="lineno">4</code> <code class="p">[</code><code class="n">INFO</code><code class="p">]</code> <code class="n">Installing</code> <code class="s">'C:/Ruby193/lib/ruby/site_ruby/devkit.rb'</code>
+</pre></div>
+
+</div>
+
+<p>That is it, you are ready to install watir and watir-webdriver gems.</p>
+
+<h4 id="internet-explorer-with-watir">Internet Explorer with watir</h4>
+
+<div class="image-with-caption">
+  <p><img src="images/ie.png" alt="Internet Explorer 9 on Windows 7" /></p><p>Internet Explorer 9 on Windows 7</p>
+</div>
+
+<p>Let&#x2019;s install Watir, finally. It is also done from the command line, the command is <code>gem install watir</code>. I prefer to add <code>--no-ri --no-rdoc</code> options, because I do not use either ri (Ruby Index) or RDoc (Ruby Documentation), and it cuts installation time to one third. So, if you want ri or Rdoc, use <code>gem install watir</code>, else use <code>gem install watir --no-ri --no-rdoc</code>.</p>
+
+<p>Watir gem (the whole Watir project got named after this gem) can drive Internet Explorer. It has better Internet Explorer support than watir-webdriver gem. Install it with <code>gem install watir --no-ri --no-rdoc</code>.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code><code class="n">gem</code> <code class="n">install</code> <code class="n">watir</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">ri</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">rdoc</code>
+<code class="lineno">2</code> <code class="p">(...)</code>
+<code class="lineno">3</code> <code class="n">Successfully</code> <code class="n">installed</code> <code class="n">watir</code><code class="o">-</code>2<code class="p">.</code>0<code class="p">.</code>4
+<code class="lineno">4</code> <code class="p">(...)</code>
+</pre></div>
+
+</div>
+
+<p>Let&#x2019;s drive Internet Explorer with it:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="o">&gt;</code><code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code>
+<code class="lineno"> 7</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">IE</code><code class="p">:</code>0<code class="n">x</code><code class="p">..</code><code class="n">f8169d746</code> <code class="n">url</code><code class="p">=</code>"<code class="n">about</code><code class="p">:</code><code class="n">blank</code>" <code class="n">title</code><code class="p">=</code>""<code class="o">&gt;</code>
+<code class="lineno"> 8</code> 
+<code class="lineno"> 9</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">watir</code><code class="p">.</code><code class="n">com</code>"
+<code class="lineno">10</code> <code class="p">=</code><code class="o">&gt;</code> 16<code class="p">.</code>998912
+</pre></div>
+
+</div>
+
+<div class="image-with-caption">
+  <p><img src="images/watir-ie.png" alt="watir gem drives Internet Explorer 9 on Windows 7" /></p><p>watir gem drives Internet Explorer 9 on Windows 7</p>
+</div>
+
+<h4 id="watir-webdriver">watir-webdriver</h4>
+
+<p>If you are just starting with Watir, start with watir-webdriver gem. It can drive Internet Explorer, Firefox, Chrome, and Opera.</p>
+
+<p>Install it with <code>gem install watir-webdriver --no-ri --no-rdoc</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code><code class="n">gem</code> <code class="n">install</code> <code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">ri</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">rdoc</code>
+<code class="lineno">2</code> <code class="p">(...)</code>
+<code class="lineno">3</code> <code class="n">Successfully</code> <code class="n">installed</code> <code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code><code class="o">-</code>0<code class="p">.</code>4<code class="p">.</code>1
+<code class="lineno">4</code> <code class="p">(...)</code>
+</pre></div>
+
+</div>
+
+<h4 id="internet-explorer-with-watir-webdriver">Internet Explorer with watir-webdriver</h4>
+
+<p>Since Internet Explorer is already installed, we will start with it. Let&#x2019;s see if watir-webdriver can drive Internet Explorer:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="o">&gt;</code><code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">ie</code>
+<code class="lineno"> 7</code> <code class="n">Selenium</code><code class="p">::</code><code class="n">WebDriver</code><code class="p">::</code><code class="n">Error</code><code class="p">::</code><code class="n">NoSuchDriverError</code><code class="p">:</code> <code class="n">Unexpected</code> <code class="n">error</code>
+<code class="lineno"> 8</code> <code class="n">launching</code> <code class="n">Internet</code> <code class="n">Explorer</code><code class="p">.</code> <code class="n">Protected</code> <code class="n">Mode</code> <code class="n">must</code> <code class="n">be</code> <code class="n">set</code> <code class="n">to</code> <code class="n">the</code>
+<code class="lineno"> 9</code> <code class="n">same</code> <code class="n">value</code> <code class="p">(</code><code class="n">enabled</code> <code class="n">or</code> <code class="n">disabled</code><code class="p">)</code> <code class="k">for</code> <code class="n">all</code> <code class="n">zones</code><code class="p">.</code>
+<code class="lineno">10</code> <code class="p">(...)</code>
+</pre></div>
+
+</div>
+
+<p>On 7 and Vista I got <code>Protected Mode must be set to the same value (enabled or disabled) for all zones</code> error message (does not appear for Internet Explorer 6 on Windows XP) and Windows Firewall popup appeared letting me know that it has blocked <code>C:\ruby192\bin\ruby.exe</code>. So, XP/IE6 users can skip enabling protected mode.</p>
+
+<div class="image-with-caption">
+  <p><img src="images/firewall.png" alt="Windows Firewall has blocked some features of this program" /></p><p>Windows Firewall has blocked some features of this program</p>
+</div>
+
+<p>For now just close the popup, let&#x2019;s see how to fix the error message.</p>
+
+<p>Open <em>Internet Explorer &gt; wrench &gt; Internet Options &gt; Security</em>. There are four zones: Internet, Local intranet, Trusted sites and Restricted sites. Protected Mode is enabled by default in Internet and Restricted sites. Enable it for Local intranet and Trusted sites and close the browser.</p>
+
+<div class="image-with-caption">
+  <p><img src="images/protected-mode.png" alt="Enable Protected Mode for all zones" /></p><p>Enable Protected Mode for all zones</p>
+</div>
+
+<p>Let&#x2019; try again:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="o">&gt;</code><code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">ie</code>
+<code class="lineno"> 7</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">:</code>0<code class="n">x</code><code class="p">..</code><code class="n">fcf3d4bb8</code> <code class="n">url</code><code class="p">=</code>"<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">localhost</code><code class="p">:</code>5555<code class="o">/</code>"
+<code class="lineno"> 8</code> <code class="n">title</code><code class="p">=</code>"<code class="n">WebDriver</code>"<code class="o">&gt;</code>
+<code class="lineno"> 9</code> 
+<code class="lineno">10</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">watir</code><code class="p">.</code><code class="n">com</code>"
+<code class="lineno">11</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">watir</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>"
+</pre></div>
+
+</div>
+
+<p>It works!</p>
+
+<div class="image-with-caption">
+  <p><img src="images/webdriver-ie.png" alt="watir-webdriver gem drives Internet Explorer 9 on Windows 7" /></p><p>watir-webdriver gem drives Internet Explorer 9 on Windows 7</p>
+</div>
+
+<h4 id="firefox-with-watir-webdriver">Firefox with watir-webdriver</h4>
+
+<div class="image-with-caption">
+  <p><img src="images/firefox.png" alt="Firefox 5 on Windows 7" /></p><p>Firefox 5 on Windows 7</p>
+</div>
+
+<p>
+  <em>Firefox 5 on Windows 7</em>
+</p>
+
+<p>Can it drive Firefox? It can! (If you do not have it installed, download it from <em><a href="http://www.mozilla.com/firefox/">mozilla.com/firefox</a></em>.)</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="o">&gt;</code><code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">ff</code>
+<code class="lineno"> 7</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">:</code>0<code class="n">x62d8c4a6</code> <code class="n">url</code><code class="p">=</code>"<code class="n">about</code><code class="p">:</code><code class="n">blank</code>" <code class="n">title</code><code class="p">=</code>""<code class="o">&gt;</code>
+<code class="lineno"> 8</code> 
+<code class="lineno"> 9</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">watir</code><code class="p">.</code><code class="n">com</code>"
+<code class="lineno">10</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">watir</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>"
+</pre></div>
+
+</div>
+
+<div class="image-with-caption">
+  <p><img src="images/webdriver-firefox.png" alt="watir-webdriver gem drives Firefox 5 on Windows 7" /></p><p>watir-webdriver gem drives Firefox 5 on Windows 7</p>
+</div>
+
+<h4 id="chrome-with-watir-webdriver">Chrome with watir-webdriver</h4>
+
+<div class="image-with-caption">
+  <p><img src="images/chrome.png" alt="Chrome 13 on Windows 7" /></p><p>Chrome 13 on Windows 7</p>
+</div>
+
+<p>Could it be that it can drive Chrome too? Let&#x2019;s find out. (You can get Chrome at <em><a href="http://www.google.com/chrome">google.com/chrome</a></em>.)</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="o">&gt;</code><code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">chrome</code>
+<code class="lineno"> 7</code> <code class="n">Selenium</code><code class="p">::</code><code class="n">WebDriver</code><code class="p">::</code><code class="n">Error</code><code class="p">::</code><code class="n">WebDriverError</code><code class="p">:</code> <code class="n">Unable</code> <code class="n">to</code> <code class="nb">find</code> <code class="n">the</code>
+<code class="lineno"> 8</code> <code class="n">chromedriver</code> <code class="n">executable</code><code class="p">.</code> <code class="n">Please</code> <code class="n">download</code> <code class="n">the</code> <code class="n">server</code> <code class="n">from</code>
+<code class="lineno"> 9</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">chromium</code><code class="o">/</code><code class="n">downloads</code><code class="o">/</code><code class="n">list</code> <code class="n">and</code> <code class="n">place</code> <code class="n">it</code>
+<code class="lineno">10</code> <code class="n">somewhere</code> <code class="n">on</code> <code class="n">your</code> <code class="n">PATH</code><code class="p">.</code> <code class="n">More</code> <code class="n">info</code> <code class="n">at</code>
+<code class="lineno">11</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">selenium</code><code class="o">/</code><code class="n">wiki</code><code class="o">/</code><code class="n">ChromeDriver</code><code class="p">.</code>
+<code class="lineno">12</code> <code class="p">(...)</code>
+</pre></div>
+
+</div>
+
+<p>Looks like there is a problem. You have to download <code>chromedriver_win32_14.0.836.0.zip</code> (or newer version) from <em>http://code.google.com/p/chromium/downloads/list</em>. Unzip the file (you will get <code>chromedriver.exe</code>) and put it in any folder that is in your <code>PATH</code>. To check which folders are in <code>PATH</code>, open command prompt and type <code>path</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code><code class="n">path</code>
+<code class="lineno">2</code> <code class="n">PATH</code><code class="p">=</code><code class="n">C</code><code class="p">:</code><code class="o">\</code><code class="n">Windows</code><code class="o">\</code><code class="n">system32</code><code class="p">;</code><code class="n">C</code><code class="p">:</code><code class="o">\</code><code class="n">Windows</code><code class="p">;</code><code class="n">C</code><code class="p">:</code><code class="o">\</code><code class="n">Windows</code><code class="o">\</code><code class="n">System32</code><code class="o">\</code><code class="n">Wbem</code><code class="p">;</code>
+<code class="lineno">3</code> <code class="n">C</code><code class="p">:</code><code class="o">\</code><code class="n">Windows</code><code class="o">\</code><code class="n">System32</code><code class="o">\</code><code class="n">WindowsPowerShell</code><code class="o">\</code><code class="n">v1</code><code class="p">.</code>0<code class="o">\</code><code class="p">;</code><code class="n">C</code><code class="p">:</code><code class="o">\</code><code class="n">Ruby192</code><code class="o">\</code><code class="n">bin</code>
+</pre></div>
+
+</div>
+
+<p>Folders are separated with <code>;</code>. <code>C:\Ruby192\bin</code> looks like a good place, so I will put <code>chromedriver.exe</code> there. Let&#x2019;s try again:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="o">&gt;</code><code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">chrome</code>
+<code class="lineno"> 7</code> <code class="n">Started</code> <code class="n">ChromeDriver</code>
+<code class="lineno"> 8</code> <code class="n">port</code><code class="p">=</code>49522
+<code class="lineno"> 9</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">:</code>0<code class="n">x</code><code class="p">..</code><code class="n">fdbf27548</code> <code class="n">url</code><code class="p">=</code>"<code class="n">about</code><code class="p">:</code><code class="n">blank</code>"
+<code class="lineno">10</code> <code class="n">title</code><code class="p">=</code>"<code class="n">about</code><code class="p">:</code><code class="n">blank</code>"<code class="o">&gt;</code>
+<code class="lineno">11</code> 
+<code class="lineno">12</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">watir</code><code class="p">.</code><code class="n">com</code>"
+<code class="lineno">13</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">watir</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>"
+</pre></div>
+
+</div>
+
+<div class="image-with-caption">
+  <p><img src="images/webdriver-chrome.png" alt="watir-webdriver gem drives Chrome 12 on Windows 7" /></p><p>watir-webdriver gem drives Chrome 12 on Windows 7</p>
+</div>
+
+<p>I got Windows Firewall popup again letting me know that it has blocked<br /><code>C:\ruby192\bin\chromedriver.exe</code>. Just close it for now, I have no idea what to do with it.</p>
+
+<h4 id="java">Java</h4>
+
+<p>To drive Opera, you will have to install Java first. Let&#x2019;s check if Java is already installed with <code>java -version</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code><code class="n">java</code> <code class="o">-</code><code class="n">version</code>
+<code class="lineno">2</code> <code class="s">'java'</code> <code class="n">is</code> <code class="n">not</code> <code class="n">recognized</code> <code class="n">as</code> <code class="n">an</code> <code class="n">internal</code> <code class="n">or</code> <code class="n">external</code> <code class="n">command</code><code class="p">,</code>
+<code class="lineno">3</code> <code class="n">operable</code> <code class="n">program</code> <code class="n">or</code> <code class="n">batch</code> <code class="n">file</code><code class="p">.</code>
+</pre></div>
+
+</div>
+
+<p>Looks like we will have to install Java. There is big <em>Free Java Download</em> button at<br /><em>http://www.java.com/en/download</em>. Execute download file and install Java. Let&#x2019;s check if Java is really installed with <code>java -version</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code><code class="n">java</code> <code class="o">-</code><code class="n">version</code>
+<code class="lineno">2</code> <code class="n">java</code> <code class="n">version</code> "1<code class="p">.</code>6<code class="p">.</code>0<code class="n">_26</code>"
+<code class="lineno">3</code> <code class="n">Java</code><code class="p">(</code><code class="n">TM</code><code class="p">)</code> <code class="n">SE</code> <code class="n">Runtime</code> <code class="n">Environment</code> <code class="p">(</code><code class="n">build</code> 1<code class="p">.</code>6<code class="p">.</code>0<code class="n">_26</code><code class="o">-</code><code class="n">b03</code><code class="p">)</code>
+<code class="lineno">4</code> <code class="n">Java</code> <code class="n">HotSpot</code><code class="p">(</code><code class="n">TM</code><code class="p">)</code> <code class="n">Client</code> <code class="n">VM</code> <code class="p">(</code><code class="n">build</code> 20<code class="p">.</code>1<code class="o">-</code><code class="n">b02</code><code class="p">,</code> <code class="n">mixed</code> <code class="n">mode</code><code class="p">,</code> <code class="n">sharing</code><code class="p">)</code>
+</pre></div>
+
+</div>
+
+<p>Looks good to me!</p>
+
+<h4 id="opera-with-watir-webdriver-on-7-and-vista">Opera with watir-webdriver on 7 and Vista</h4>
+
+<div class="image-with-caption">
+  <p><img src="images/opera.png" alt="Opera on Windows 7" /></p><p>Opera on Windows 7</p>
+</div>
+
+<p>And finally, let&#x2019;s drive Opera. If you do not have it installed, you can get it at <em><a href="http://www.opera.com/">opera.com</a></em>.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="o">&gt;</code><code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">opera</code>
+<code class="lineno"> 7</code> <code class="n">Selenium</code><code class="p">::</code><code class="n">WebDriver</code><code class="p">::</code><code class="n">Error</code><code class="p">::</code><code class="n">WebDriverError</code><code class="p">:</code> <code class="n">Unable</code> <code class="n">to</code> <code class="nb">find</code> <code class="n">the</code>
+<code class="lineno"> 8</code> <code class="n">Selenium</code> <code class="n">server</code> <code class="n">jar</code><code class="p">.</code>  <code class="n">Please</code> <code class="n">download</code> <code class="n">the</code> <code class="n">standalone</code> <code class="n">server</code> <code class="n">from</code>
+<code class="lineno"> 9</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">selenium</code><code class="o">/</code><code class="n">downloads</code><code class="o">/</code><code class="n">list</code> <code class="n">and</code> <code class="n">set</code> <code class="n">the</code>
+<code class="lineno">10</code> <code class="n">SELENIUM_SERVER_JAR</code> <code class="n">environmental</code> <code class="n">variable</code> <code class="n">to</code> <code class="n">its</code> <code class="n">location</code><code class="p">.</code>  <code class="n">More</code>
+<code class="lineno">11</code> <code class="n">info</code> <code class="n">at</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">selenium</code><code class="o">/</code><code class="n">wiki</code><code class="o">/</code><code class="n">OperaDriver</code><code class="p">.</code>
+</pre></div>
+
+</div>
+
+<p>Download <code>selenium-server-standalone-2.5.0.jar</code> (or newer version) from<br /><em>http://code.google.com/p/selenium/downloads/list</em> and put it in <code>C:\Ruby192\bin</code>. Then make <code>SELENIUM_SERVER_JAR</code> environmental variable and set it to <code>C:\Ruby192\bin\selenium-server-standalone-2.5.0.jar</code>. To create environmental variable, right click <em>computer</em> and click <code>Properties &gt; Advanced system settings &gt; Environmental Variables &gt; User variables &gt; New... &gt; Variable name: SELENIUM_SERVER_JAR &gt; Variable value: C:\Ruby192\bin\selenium-server-standalone-2.5.0.jar &gt; OK &gt; OK &gt; OK</code>.</p>
+
+<p>Open new command prompt, the old one will not see <code>SELENIUM_SERVER_JAR</code> variable.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="o">&gt;</code><code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">opera</code>
+<code class="lineno"> 7</code> <code class="n">Selenium</code><code class="p">::</code><code class="n">WebDriver</code><code class="p">::</code><code class="n">Error</code><code class="p">::</code><code class="n">UnhandledError</code><code class="p">:</code> <code class="n">No</code> <code class="n">response</code> <code class="n">in</code> <code class="n">a</code>
+<code class="lineno"> 8</code>   <code class="n">timely</code> <code class="n">fashion</code><code class="p">.</code>
+<code class="lineno"> 9</code> <code class="n">Build</code> <code class="n">info</code><code class="p">:</code> <code class="n">version</code><code class="p">:</code> <code class="s">'2.3.0'</code><code class="p">,</code> <code class="n">revision</code><code class="p">:</code> <code class="s">'13158'</code><code class="p">,</code> <code class="n">time</code><code class="p">:</code>
+<code class="lineno">10</code>   <code class="s">'2011-08-01 18:13:39'</code>
+<code class="lineno">11</code> <code class="n">System</code> <code class="n">info</code><code class="p">:</code> <code class="n">os</code><code class="p">.</code><code class="n">name</code><code class="p">:</code> <code class="s">'Windows 7'</code><code class="p">,</code> <code class="n">os</code><code class="p">.</code><code class="n">arch</code><code class="p">:</code> <code class="s">'x86'</code><code class="p">,</code>
+<code class="lineno">12</code>   <code class="n">os</code><code class="p">.</code><code class="n">version</code><code class="p">:</code> <code class="s">'6.1'</code><code class="p">,</code> <code class="n">java</code><code class="p">.</code><code class="n">version</code><code class="p">:</code> <code class="s">'1.6.0_26'</code>
+<code class="lineno">13</code> <code class="n">Driver</code> <code class="n">info</code><code class="p">:</code> <code class="n">driver</code><code class="p">.</code><code class="n">version</code><code class="p">:</code> <code class="n">OperaDriver</code>
+<code class="lineno">14</code>   <code class="p">(</code><code class="n">com</code><code class="p">.</code><code class="n">opera</code><code class="p">.</code><code class="n">core</code><code class="p">.</code><code class="n">systems</code><code class="p">.</code><code class="n">scope</code><code class="p">.</code><code class="n">exceptions</code><code class="p">.</code>
+<code class="lineno">15</code>   <code class="n">ResponseNotReceivedException</code><code class="p">)</code>
+</pre></div>
+
+</div>
+
+<p>IRB said <code>No response in a timely fashion</code>. Then I got Windows Firewall popup. Since I do not know what to do with it, just close the popup.</p>
+
+<div class="image-with-caption">
+  <p><img src="images/java.png" alt="Windows Firewall blocking Java" /></p><p>Windows Firewall blocking Java</p>
+</div>
+
+<p>And finally I got Opera startup error popup saying: <code>Opera has failed to access or upgrade your profile. This may have occurred because your computer has insufficient resources available or because some files are locked by other applications. You may have to restart your computer before Opera will start again.</code></p>
+
+<div class="image-with-caption">
+  <p><img src="images/opera-startup-error.png" alt="Opera startup error" /></p><p>Opera startup error</p>
+</div>
+
+<p>Well, rebooting did not help. Not even reinstalling Opera (and then rebooting). What did help is running command prompt as administrator. So, instead of <em>Start &gt; Search programs and files &gt; cmd &gt; Enter</em>, right click <em>cmd</em> and select <em>Run as administrator</em>.</p>
+
+<div class="image-with-caption">
+  <p><img src="images/cmd-as-administrator.png" alt="Run command prompt as administrator" /></p><p>Run command prompt as administrator</p>
+</div>
+
+<p>Finally, let&#x2019;s drive Opera:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="o">&gt;</code><code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">opera</code>
+<code class="lineno"> 7</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">:</code>0<code class="n">x</code><code class="p">..</code><code class="n">fef436832</code> <code class="n">url</code><code class="p">=</code>"<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">www</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">hr</code><code class="o">/</code>"
+<code class="lineno"> 8</code>   <code class="n">title</code><code class="p">=</code>"<code class="n">Google</code>"<code class="o">&gt;</code>
+<code class="lineno"> 9</code> 
+<code class="lineno">10</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">watir</code><code class="p">.</code><code class="n">com</code>"
+<code class="lineno">11</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">watir</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>"
+</pre></div>
+
+</div>
+
+<div class="image-with-caption">
+  <p><img src="images/webdriver-opera.png" alt="watir-webdriver gem drives Opera 11.50 on Windows 7" /></p><p>watir-webdriver gem drives Opera 11.50 on Windows 7</p>
+</div>
+
+<h4 id="opera-with-watir-webdriver-on-xp">Opera with watir-webdriver on XP</h4>
+
+<p>And finally, let&#x2019;s drive Opera. If you do not have it installed, you can get it at <em><a href="http://www.opera.com/">opera.com</a></em>.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="o">&gt;</code><code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">opera</code>
+<code class="lineno"> 7</code> <code class="n">Selenium</code><code class="p">::</code><code class="n">WebDriver</code><code class="p">::</code><code class="n">Error</code><code class="p">::</code><code class="n">WebDriverError</code><code class="p">:</code> <code class="n">Unable</code> <code class="n">to</code> <code class="nb">find</code> <code class="n">the</code>
+<code class="lineno"> 8</code> <code class="n">Selenium</code> <code class="n">server</code> <code class="n">jar</code><code class="p">.</code>  <code class="n">Please</code> <code class="n">download</code> <code class="n">the</code> <code class="n">standalone</code> <code class="n">server</code> <code class="n">from</code>
+<code class="lineno"> 9</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">selenium</code><code class="o">/</code><code class="n">downloads</code><code class="o">/</code><code class="n">list</code> <code class="n">and</code> <code class="n">set</code> <code class="n">the</code>
+<code class="lineno">10</code> <code class="n">SELENIUM_SERVER_JAR</code> <code class="n">environmental</code> <code class="n">variable</code> <code class="n">to</code> <code class="n">its</code> <code class="n">location</code><code class="p">.</code>  <code class="n">More</code>
+<code class="lineno">11</code> <code class="n">info</code> <code class="n">at</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">selenium</code><code class="o">/</code><code class="n">wiki</code><code class="o">/</code><code class="n">OperaDriver</code><code class="p">.</code>
+</pre></div>
+
+</div>
+
+<p>Download <code>selenium-server-standalone-2.5.0.jar</code> (or newer version) from<br /><em>http://code.google.com/p/selenium/downloads/list</em> and put it in <code>C:\Ruby192\bin</code>. Then make <code>SELENIUM_SERVER_JAR</code> environmental variable and set it to <code>C:\Ruby192\bin\selenium-server-standalone-2.5.0.jar</code>. To create environmental variable right click <em>My Computer</em> and then <code>Properties &gt; Advanced &gt; Environment Variables &gt; User variables &gt; New &gt; Variable name: SELENIUM_SERVER_JAR &gt; Variable value: C:\Ruby192\bin\selenium-server-standalone-2.5.0.jar &gt; OK &gt; OK &gt; OK</code></p>
+
+<p>Open new command prompt, the old one will not see <code>SELENIUM_SERVER_JAR</code> variable.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="o">&gt;</code><code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">opera</code>
+<code class="lineno"> 7</code> <code class="n">Selenium</code><code class="p">::</code><code class="n">WebDriver</code><code class="p">::</code><code class="n">Error</code><code class="p">::</code><code class="n">UnhandledError</code><code class="p">:</code> <code class="n">Could</code> <code class="n">not</code> <code class="n">start</code> <code class="n">the</code>
+<code class="lineno"> 8</code>   <code class="n">process</code><code class="p">:</code>
+<code class="lineno"> 9</code> <code class="n">Cannot</code> <code class="n">run</code> <code class="n">program</code>
+<code class="lineno">10</code> "<code class="n">C</code><code class="p">:</code><code class="o">\</code><code class="n">Documents</code> <code class="n">and</code> <code class="n">Settings</code><code class="o">\</code><code class="n">zeljko</code><code class="o">\</code><code class="p">.</code><code class="n">launcher</code><code class="o">\</code>
+<code class="lineno">11</code>   <code class="n">launcher</code><code class="o">-</code><code class="n">win32</code><code class="o">-</code><code class="n">i86pc</code><code class="p">.</code><code class="n">exe</code>"<code class="p">:</code>
+<code class="lineno">12</code> <code class="n">CreateProcess</code> <code class="n">error</code><code class="p">=</code>14001<code class="p">,</code> <code class="n">This</code> <code class="n">application</code> <code class="n">has</code> <code class="n">failed</code> <code class="n">to</code> <code class="n">start</code>
+<code class="lineno">13</code>   <code class="n">because</code> <code class="n">the</code>
+<code class="lineno">14</code> <code class="n">application</code> <code class="n">configuration</code> <code class="n">is</code> <code class="n">incorrect</code><code class="p">.</code> <code class="n">Reinstalling</code> <code class="n">the</code>
+<code class="lineno">15</code>   <code class="n">application</code> <code class="n">may</code> <code class="nb">fix</code> <code class="n">this</code> <code class="n">problem</code>
+<code class="lineno">16</code> <code class="n">Build</code> <code class="n">info</code><code class="p">:</code> <code class="n">version</code><code class="p">:</code> <code class="s">'2.5.0'</code><code class="p">,</code> <code class="n">revision</code><code class="p">:</code> <code class="s">'13516'</code><code class="p">,</code> <code class="n">time</code><code class="p">:</code>
+<code class="lineno">17</code>   <code class="s">'2011-08-23 18:29:57'</code>
+<code class="lineno">18</code> <code class="n">System</code> <code class="n">info</code><code class="p">:</code> <code class="n">os</code><code class="p">.</code><code class="n">name</code><code class="p">:</code> <code class="s">'Windows XP'</code><code class="p">,</code> <code class="n">os</code><code class="p">.</code><code class="n">arch</code><code class="p">:</code> <code class="s">'x86'</code><code class="p">,</code>
+<code class="lineno">19</code>   <code class="n">os</code><code class="p">.</code><code class="n">version</code><code class="p">:</code> <code class="s">'5.1'</code><code class="p">,</code> <code class="n">java</code><code class="p">.</code><code class="n">version</code><code class="p">:</code> <code class="s">'1.6.0_26'</code>
+<code class="lineno">20</code> <code class="n">Driver</code> <code class="n">info</code><code class="p">:</code> <code class="n">driver</code><code class="p">.</code><code class="n">version</code><code class="p">:</code> <code class="n">OperaDriver</code>
+<code class="lineno">21</code> <code class="p">(</code><code class="n">org</code><code class="p">.</code><code class="n">openqa</code><code class="p">.</code><code class="n">selenium</code><code class="p">.</code><code class="n">WebDriverException</code><code class="p">)</code>
+</pre></div>
+
+</div>
+
+<p>I got Windows Firewall popup. Since I do not know what to do with it, just close the popup.</p>
+
+<div class="image-with-caption">
+  <p><img src="images/java.png" alt="Windows Firewall blocking Java" /></p><p>Windows Firewall blocking Java</p>
+</div>
+
+<p>I also got <code>This application has failed to start because the application configuration is incorrect. Reinstalling the application may fix this problem</code> error message. Well, rebooting did not help. Not even reinstalling Opera (and then rebooting). What did help is installing <a href="http://www.microsoft.com/download/en/details.aspx?id=29">Microsoft Visual C++ 2008 Redistributable Package (x86)</a>.</p>
+
+<p>Finally, let&#x2019;s drive Opera:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> <code class="o">&gt;</code><code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">opera</code>
+<code class="lineno"> 7</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">:</code>0<code class="n">x</code><code class="p">..</code><code class="n">fef436832</code> <code class="n">url</code><code class="p">=</code>"<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">www</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">hr</code><code class="o">/</code>"
+<code class="lineno"> 8</code>   <code class="n">title</code><code class="p">=</code>"<code class="n">Google</code>"<code class="o">&gt;</code>
+<code class="lineno"> 9</code> 
+<code class="lineno">10</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">watir</code><code class="p">.</code><code class="n">com</code>"
+<code class="lineno">11</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">watir</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>"
+</pre></div>
+
+</div>
+
+<h3 id="mac-os-x-108-107-106-and-105">Mac OS X 10.8, 10.7, 10.6 and 10.5</h3>
+
+<p>
+  <em>You will need internet access if you want to follow examples in this chapter.</em>
+</p>
+
+<div class="image-with-caption">
+  <p><img src="images/desktop.png" alt="Mac OS X 10.7 default desktop" /></p><p>Mac OS X 10.7 default desktop</p>
+</div>
+
+<p>Machine is a clean installation of Mac OS X 10.7.2, 10.6.8 or 10.5.8, fully patched, with 4 GB RAM. 10.7 has Safari 5.1.2, 10.6 has Safari 5.1 and 10.5 has Safari 5.0.6. Firefox is 9.0.1, Chrome 16, Opera 11.60. All browsers are English (US) version.
+All steps for Mac OS X 10.7 should also work on 10.8 (Mountain Lion), tested on 10.8.1.</p>
+
+<h4 id="ruby-1">Ruby</h4>
+
+<p>Regarding installing Ruby on Mac, I have good news and bad news. Good news is that Ruby is already installed by default, so you can skip this step if you just want to try Watir. Bad news is that you have an old version of Ruby installed. It will be good enough for trying Watir, but if you decide you want to use it, you will probably want to install a newer version. So, for now, I will skip Ruby installation. I will cover it later.</p>
+
+<p>To check if Ruby is installed on your Mac, open Terminal application (located in <code>/Applications/Utilities</code>) any type <code>ruby -v</code>.</p>
+
+<p>On 10.7 you should get this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">ruby</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> <code class="n">ruby</code> 1<code class="p">.</code>8<code class="p">.</code>7 <code class="p">(</code>2010<code class="o">-</code>01<code class="o">-</code>10 <code class="n">patchlevel</code> 249<code class="p">)</code> <code class="p">[</code><code class="n">universal</code><code class="o">-</code><code class="n">darwin11</code><code class="p">.</code>0<code class="p">]</code>
+</pre></div>
+
+</div>
+
+<p>On 10.6 you should get this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">ruby</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> <code class="n">ruby</code> 1<code class="p">.</code>8<code class="p">.</code>7 <code class="p">(</code>2009<code class="o">-</code>06<code class="o">-</code>12 <code class="n">patchlevel</code> 174<code class="p">)</code> <code class="p">[</code><code class="n">universal</code><code class="o">-</code><code class="n">darwin10</code><code class="p">.</code>0<code class="p">]</code>
+</pre></div>
+
+</div>
+
+<p>On 10.5 you should get this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">ruby</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> <code class="n">ruby</code> 1<code class="p">.</code>8<code class="p">.</code>6 <code class="p">(</code>2009<code class="o">-</code>06<code class="o">-</code>08 <code class="n">patchlevel</code> 369<code class="p">)</code> <code class="p">[</code><code class="n">universal</code><code class="o">-</code><code class="n">darwin9</code><code class="p">.</code>0<code class="p">]</code>
+</pre></div>
+
+</div>
+
+<h4 id="rubygems-on-107-and-106">RubyGems on 10.7 and 10.6</h4>
+
+<p>With RubyGems, the same story as with Ruby. It is already installed, but an old version. Let&#x2019;s see which version is here with <code>gem -v</code>.</p>
+
+<p>On 10.7 you should get this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">gem</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> 1<code class="p">.</code>3<code class="p">.</code>6
+</pre></div>
+
+</div>
+
+<p>On 10.6 you should get this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">gem</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> 1<code class="p">.</code>3<code class="p">.</code>5
+</pre></div>
+
+</div>
+
+<p>Both versions are pretty old. Watir needs never version. Fortunately, it is easy to upgrade RubyGems with <code>sudo gem update --system</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">sudo</code> <code class="n">gem</code> <code class="n">update</code> <code class="o">--</code><code class="n">system</code>
+<code class="lineno">2</code> <code class="p">(...)</code>
+<code class="lineno">3</code> <code class="n">RubyGems</code> 1<code class="p">.</code>8<code class="p">.</code>12 <code class="n">installed</code>
+<code class="lineno">4</code> <code class="p">(...)</code>
+</pre></div>
+
+</div>
+
+<h4 id="rubygems-on-105">RubyGems on 10.5</h4>
+
+<p>With RubyGems, the same story as with Ruby. It is already installed, but an old version. Let&#x2019;s see which version is here with <code>gem -v</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">gem</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> 1<code class="p">.</code>0<code class="p">.</code>1
+</pre></div>
+
+</div>
+
+<p>RubyGems 1.0.1 is pretty old. Watir needs newer version. Fortunately, it should be easy to upgrade RubyGems with <code>sudo gem update --system</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">sudo</code> <code class="n">gem</code> <code class="n">update</code> <code class="o">--</code><code class="n">system</code>
+<code class="lineno">2</code> <code class="p">(...)</code>
+<code class="lineno">3</code> <code class="n">Updating</code> <code class="n">RubyGems</code><code class="p">...</code>
+<code class="lineno">4</code> <code class="n">ERROR</code><code class="p">:</code>  <code class="n">While</code> <code class="n">executing</code> <code class="n">gem</code> <code class="p">...</code> <code class="p">(</code><code class="n">Gem</code><code class="p">::</code><code class="n">RemoteSourceException</code><code class="p">)</code>
+<code class="lineno">5</code> <code class="n">HTTP</code> <code class="n">Response</code> 302 <code class="n">fetching</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">gems</code><code class="p">.</code><code class="n">rubyforge</code><code class="p">.</code><code class="n">org</code><code class="o">/</code><code class="n">yaml</code>
+</pre></div>
+
+</div>
+
+<p>Now you see why I said &#x201C;should be easy&#x201D;. RubyGems 1.0.1 is so old, it could not even be updated the easy way. See how lucky you are to have this book? Of course there is a way to upgrade to the newer version of RubyGems. The latest version I could install or Ruby 1.8.6 is RubyGems 1.4.2. Download <a href="https://rubygems.org/gems/rubygems-update/versions/1.4.2">rubygems-update-1.4.2.gem</a> (click <em>Download</em> link), open Terminal window in folder where you have downloaded it (<code>/Users/zeljko/Downloads</code> in my case) and install it:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">sudo</code> <code class="n">gem</code> <code class="n">install</code> <code class="o">-</code><code class="n">l</code> <code class="n">rubygems</code><code class="o">-</code><code class="n">update</code><code class="o">-</code>1<code class="p">.</code>4<code class="p">.</code>2<code class="p">.</code><code class="n">gem</code>
+<code class="lineno">2</code> <code class="n">Successfully</code> <code class="n">installed</code> <code class="n">rubygems</code><code class="o">-</code><code class="n">update</code><code class="o">-</code>1<code class="p">.</code>4<code class="p">.</code>2
+<code class="lineno">3</code> 1 <code class="n">gem</code> <code class="n">installed</code>
+<code class="lineno">4</code> <code class="n">Installing</code> <code class="n">ri</code> <code class="n">documentation</code> <code class="k">for</code> <code class="n">rubygems</code><code class="o">-</code><code class="n">update</code><code class="o">-</code>1<code class="p">.</code>4<code class="p">.</code>2<code class="p">...</code>
+<code class="lineno">5</code> <code class="n">Installing</code> <code class="n">RDoc</code> <code class="n">documentation</code> <code class="k">for</code> <code class="n">rubygems</code><code class="o">-</code><code class="n">update</code><code class="o">-</code>1<code class="p">.</code>4<code class="p">.</code>2<code class="p">...</code>
+<code class="lineno">6</code> 
+<code class="lineno">7</code> $ <code class="n">sudo</code> <code class="n">update_rubygems</code>
+<code class="lineno">8</code> <code class="n">RubyGems</code> 1<code class="p">.</code>4<code class="p">.</code>2 <code class="n">installed</code>
+<code class="lineno">9</code> <code class="n">File</code> <code class="n">not</code> <code class="n">found</code><code class="p">:</code> <code class="n">README</code>
+</pre></div>
+
+</div>
+
+<p>Ignore <code>File not found: README</code> error message. Check if RubyGems is updated:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">gem</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> 1<code class="p">.</code>4<code class="p">.</code>2
+</pre></div>
+
+</div>
+
+<p>Everything is as it should be.</p>
+
+<h4 id="osx-gcc-installer">OSX GCC Installer</h4>
+
+<div class="image-with-caption">
+  <p><img src="images/gcc.png" alt="OSX GCC Installer" /></p><p>OSX GCC Installer</p>
+</div>
+
+<p>You will need OSX GCC Installer or Xcode if you want to install watir-webdriver gem. OSX GCC Installer is way smaller than Xcode (287 MB instead of 1.68 GB for 10.7, 180 MB instead of 4.1 GB for 10.6). If you want to install safariwatir gem, OSX GCC Installer is not enough, you will have to install Xcode. There is no OSX GCC Installer for 10.5, you will have to install Xcode 3.1 (&#x201C;just&#x201D; 1 GB).</p>
+
+<p>Download OSX GCC Installer from https://github.com/kennethreitz/osx-gcc-installer and install it.</p>
+
+<h4 id="xcode-421-for-107">Xcode 4.2.1 for 10.7</h4>
+
+<div class="image-with-caption">
+  <p><img src="images/xcode-4-2-1.png" alt="Install Xcode 4.2.1 from App Store" /></p><p>Install Xcode 4.2.1 from App Store</p>
+</div>
+
+<p>To install Xcode 4.2.1 on 10.7, open App Store application, search for Xcode and download it. Please notice it is 1.68 GB. After the download is complete, you will find <code>Install Xcode.app</code> file in <code>/Applications</code>. Install it.</p>
+
+<h4 id="xcode-32-for-106">Xcode 3.2 for 10.6</h4>
+
+<p>
+  <em>Xcode 3.2 does not work on Mac OS 10.5. It works on 10.6.</em>
+</p>
+
+<p>You will need Xcode from Apple if you want to install watir-webdriver or safariwatir gems.</p>
+
+<p>The easiest way to install Xcode is from Mac OS DVD. Insert the DVD, go to <em>Optional Installs</em> folder and double click <em>Xcode.mpkg</em> file.</p>
+
+<div class="image-with-caption">
+  <p><img src="images/xcode-3-2.png" alt="Install Xcode 3.2 from Mac OS DVD" /></p><p>Install Xcode 3.2 from Mac OS DVD</p>
+</div>
+
+<p>You can get a newer version from Apple web site. You will need Apple ID. It is username and password you already use for iTunes Store or Mac App Store. If you do not have Apple ID, you can create one for free. Sign in with your Apple ID at <a href="http://developer.apple.com/xcode/">Xcode</a> site and on the bottom right you will see <em>Looking for Xcode 3? Download Now</em>. Download <em>Xcode 3.2.6 and iOS SDK 4.3 (Disk Image)</em>. Please notice it is 4.1 GB.</p>
+
+<p>You can get the newest Xcode 3.2 without Apple ID and without downloading 4 GB file. Install Xcode 3.2 from Mac OS DVD and run Software Update. It will update Xcode to 3.2.6, and downloaded file will be &#x201C;just&#x201D; about 600 MB.</p>
+
+<h4 id="xcode-31-for-105">Xcode 3.1 for 10.5</h4>
+
+<p>
+  <em>Xcode 3.1 is for Mac OS 10.5. On 10.6 install Xcode 3.2 or Xcode 4.</em>
+</p>
+
+<p>You will need Xcode from Apple for watir-webdriver and safariwatir gems.</p>
+
+<p>The easiest way to install Xcode is from Mac OS DVD. Insert the DVD, go to <em>Optional Installs/Xcode Tools</em> folder and double click <em>XcodeTools</em> file. Leave all settings at default values.</p>
+
+<div class="image-with-caption">
+  <p><img src="images/xcode-3-1.png" alt="Install Xcode 3.1.2 from Mac OS DVD" /></p><p>Install Xcode 3.1.2 from Mac OS DVD</p>
+</div>
+
+<p>Optionally, after Xcode is installed, run Software Update. At the moment, there is no update.</p>
+
+<p>If you do not have Mac OS 10.5 DVD, you can download Xcode 3.1.4 from Apple. Log in to http://connect.apple.com/ with your Apple ID. Click <em>Developer Tools</em> link (at the right hand side, under <em>Downloads</em>) and download <em>Xcode 3.1.4 Developer DVD (Disk Image)</em>. Please note it is 993 MB.</p>
+
+<h4 id="xcode-4-for-106">Xcode 4 for 10.6</h4>
+
+<p>
+  <em>Xcode 4 does not work on Mac OS 10.5. It works on 10.6.</em>
+</p>
+
+<p>According to Xcode site, Xcode 4 &#x201C;is a free download for all members of the iOS and Mac Developer Programs&#x201D;. Both programs are $99/year. If you are not a member of mentioned programs (I am not), you can buy it from Mac App Store for $4.99. But, since you can install Xcode 3 for free, there is no need to buy anything.</p>
+
+<h4 id="safari-with-safariwatir">Safari with safariwatir</h4>
+
+<div class="image-with-caption">
+  <p><img src="images/safari.png" alt="Safari 5.1 on Mac 10.6" /></p><p>Safari 5.1 on Mac 10.6</p>
+</div>
+
+<p>Safari is installed by default on Mac OS X, so you do not have to install it. You do have to install Xcode 3 or 4 (see previous chapters).</p>
+
+<p>If you do not have Xcode installed, you will get this error message if you try to install safariwatir:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> $ <code class="n">sudo</code> <code class="n">gem</code> <code class="n">install</code> <code class="n">safariwatir</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">ri</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">rdoc</code>
+<code class="lineno"> 2</code> <code class="p">(...)</code>
+<code class="lineno"> 3</code> <code class="n">Fetching</code><code class="p">:</code> <code class="n">rb</code><code class="o">-</code><code class="n">appscript</code><code class="o">-</code>0<code class="p">.</code>6<code class="p">.</code>1<code class="p">.</code><code class="n">gem</code> <code class="p">(</code>100<code class="c">%)</code>
+<code class="lineno"> 4</code> <code class="n">Building</code> <code class="n">native</code> <code class="n">extensions</code><code class="p">.</code>  <code class="n">This</code> <code class="n">could</code> <code class="n">take</code> <code class="n">a</code> <code class="k">while</code><code class="p">...</code>
+<code class="lineno"> 5</code> <code class="n">ERROR</code><code class="p">:</code>  <code class="n">Error</code> <code class="n">installing</code> <code class="n">safariwatir</code><code class="p">:</code>
+<code class="lineno"> 6</code> <code class="n">ERROR</code><code class="p">:</code> <code class="n">Failed</code> <code class="n">to</code> <code class="n">build</code> <code class="n">gem</code> <code class="n">native</code> <code class="n">extension</code><code class="p">.</code>
+<code class="lineno"> 7</code> <code class="o">/</code><code class="n">System</code><code class="o">/</code><code class="n">Library</code><code class="o">/</code><code class="n">Frameworks</code><code class="o">/</code><code class="n">Ruby</code><code class="p">.</code><code class="n">framework</code><code class="o">/</code><code class="n">Versions</code><code class="o">/</code>1<code class="p">.</code>8<code class="o">/</code>
+<code class="lineno"> 8</code> <code class="n">usr</code><code class="o">/</code><code class="n">bin</code><code class="o">/</code><code class="n">ruby</code> <code class="n">extconf</code><code class="p">.</code><code class="n">rb</code>
+<code class="lineno"> 9</code> <code class="n">mkmf</code><code class="p">.</code><code class="n">rb</code> <code class="n">can</code><code class="o">'</code><code class="n">t</code> <code class="nb">find</code> <code class="n">header</code> <code class="n">files</code> <code class="k">for</code> <code class="n">ruby</code> <code class="n">at</code> <code class="o">/</code><code class="n">System</code><code class="o">/</code><code class="n">Library</code><code class="o">/</code>
+<code class="lineno">10</code> <code class="n">Frameworks</code><code class="o">/</code><code class="n">Ruby</code><code class="p">.</code><code class="n">framework</code><code class="o">/</code><code class="n">Versions</code><code class="o">/</code>1<code class="p">.</code>8<code class="o">/</code><code class="n">usr</code><code class="o">/</code><code class="n">lib</code><code class="o">/</code><code class="n">ruby</code><code class="o">/</code><code class="n">ruby</code><code class="p">.</code><code class="n">h</code>
+<code class="lineno">11</code> <code class="n">Gem</code> <code class="n">files</code> <code class="n">will</code> <code class="n">remain</code> <code class="n">installed</code> <code class="n">in</code> <code class="o">/</code><code class="n">Library</code><code class="o">/</code><code class="n">Ruby</code><code class="o">/</code><code class="n">Gems</code><code class="o">/</code>1<code class="p">.</code>8<code class="o">/</code><code class="n">gems</code><code class="o">/</code>
+<code class="lineno">12</code> <code class="n">rb</code><code class="o">-</code><code class="n">appscript</code><code class="o">-</code>0<code class="p">.</code>6<code class="p">.</code>1 <code class="k">for</code> <code class="n">inspection</code><code class="p">.</code>
+<code class="lineno">13</code> <code class="n">Results</code> <code class="n">logged</code> <code class="n">to</code> <code class="o">/</code><code class="n">Library</code><code class="o">/</code><code class="n">Ruby</code><code class="o">/</code><code class="n">Gems</code><code class="o">/</code>1<code class="p">.</code>8<code class="o">/</code><code class="n">gems</code><code class="o">/</code><code class="n">rb</code><code class="o">-</code><code class="n">appscript</code><code class="o">-</code>0<code class="p">.</code>6<code class="p">.</code>1<code class="o">/</code>
+<code class="lineno">14</code> <code class="o">./</code><code class="n">gem_make</code><code class="p">.</code><code class="n">out</code>
+</pre></div>
+
+</div>
+
+<p>Install Xcode 3 or 4 and try again:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">sudo</code> <code class="n">gem</code> <code class="n">install</code> <code class="n">safariwatir</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">ri</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">rdoc</code>
+<code class="lineno">2</code> <code class="p">(...)</code>
+<code class="lineno">3</code> <code class="n">Successfully</code> <code class="n">installed</code> <code class="n">safariwatir</code><code class="o">-</code>0<code class="p">.</code>4<code class="p">.</code>0
+<code class="lineno">4</code> <code class="p">(...)</code>
+</pre></div>
+
+</div>
+
+<p>Let&#x2019;s try safariwatir.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> $ <code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">safariwatir</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Safari</code><code class="p">.</code><code class="n">new</code>
+<code class="lineno"> 7</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Safari</code><code class="p">:</code>0<code class="n">x10116fc68</code>
+<code class="lineno"> 8</code>   <code class="p">@</code><code class="n">scripter</code><code class="p">=</code>#<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">AppleScripter</code><code class="p">:</code>0<code class="n">x10116fbf0</code>
+<code class="lineno"> 9</code>   <code class="p">@</code><code class="n">js</code><code class="p">=</code>#<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">JavaScripter</code><code class="p">:</code>0<code class="n">x10116fc18</code><code class="o">&gt;</code><code class="p">,</code> <code class="p">@</code><code class="n">typing_lag</code><code class="p">=</code>0<code class="p">.</code>08<code class="p">,</code>
+<code class="lineno">10</code>   <code class="p">@</code><code class="n">app</code><code class="p">=</code><code class="n">app</code><code class="p">(</code>"<code class="o">/</code><code class="n">Applications</code><code class="o">/</code><code class="n">Safari</code><code class="p">.</code><code class="n">app</code>"<code class="p">),</code>
+<code class="lineno">11</code>   <code class="p">@</code><code class="n">document</code><code class="p">=</code><code class="n">app</code><code class="p">(</code>"<code class="o">/</code><code class="n">Applications</code><code class="o">/</code><code class="n">Safari</code><code class="p">.</code><code class="n">app</code>"<code class="p">).</code><code class="n">documents</code><code class="p">[</code>1<code class="p">],</code>
+<code class="lineno">12</code>   <code class="p">@</code><code class="n">appname</code><code class="p">=</code>"<code class="n">Safari</code>"<code class="o">&gt;&gt;</code>
+<code class="lineno">13</code> 
+<code class="lineno">14</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">watir</code><code class="p">.</code><code class="n">com</code>"
+<code class="lineno">15</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">nil</code>
+</pre></div>
+
+</div>
+
+<p>It works! :)</p>
+
+<div class="image-with-caption">
+  <p><img src="images/safariwatir.png" alt="safariwatir gem driving Safari 5 on Mac OS 10.6" /></p><p>safariwatir gem driving Safari 5 on Mac OS 10.6</p>
+</div>
+
+<h4 id="watir-webdriver-1">watir-webdriver</h4>
+
+<p>Let&#x2019;s try watir-webdriver gem. For now it can drive Firefox, Chrome and Opera. It should also be able to drive Safari in the future. Install it with <code>sudo gem install watir-webdriver --no-ri --no-rdoc</code>.</p>
+
+<p>If you did not install OSX GCC Installer or Xcode, you will get this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> $ <code class="n">sudo</code> <code class="n">gem</code> <code class="n">install</code> <code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">ri</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">rdoc</code>
+<code class="lineno"> 2</code> <code class="p">(...)</code>
+<code class="lineno"> 3</code> <code class="n">Fetching</code><code class="p">:</code> <code class="n">ffi</code><code class="o">-</code>1<code class="p">.</code>0<code class="p">.</code>7<code class="p">.</code><code class="n">gem</code> <code class="p">(</code>100<code class="c">%)</code>
+<code class="lineno"> 4</code> <code class="p">(...)</code>
+<code class="lineno"> 5</code> <code class="n">Building</code> <code class="n">native</code> <code class="n">extensions</code><code class="p">.</code>  <code class="n">This</code> <code class="n">could</code> <code class="n">take</code> <code class="n">a</code> <code class="k">while</code><code class="p">...</code>
+<code class="lineno"> 6</code> <code class="n">ERROR</code><code class="p">:</code>  <code class="n">Error</code> <code class="n">installing</code> <code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code><code class="p">:</code>
+<code class="lineno"> 7</code> <code class="n">ERROR</code><code class="p">:</code> <code class="n">Failed</code> <code class="n">to</code> <code class="n">build</code> <code class="n">gem</code> <code class="n">native</code> <code class="n">extension</code><code class="p">.</code>
+<code class="lineno"> 8</code> <code class="o">/</code><code class="n">System</code><code class="o">/</code><code class="n">Library</code><code class="o">/</code><code class="n">Frameworks</code><code class="o">/</code><code class="n">Ruby</code><code class="p">.</code><code class="n">framework</code><code class="o">/</code><code class="n">Versions</code><code class="o">/</code>1<code class="p">.</code>8<code class="o">/</code>
+<code class="lineno"> 9</code>   <code class="n">usr</code><code class="o">/</code><code class="n">bin</code><code class="o">/</code><code class="n">ruby</code><code class="o">/</code><code class="n">extconf</code><code class="p">.</code><code class="n">rb</code>
+<code class="lineno">10</code> <code class="n">mkmf</code><code class="p">.</code><code class="n">rb</code> <code class="n">can</code><code class="o">'</code><code class="n">t</code> <code class="nb">find</code> <code class="n">header</code> <code class="n">files</code> <code class="k">for</code> <code class="n">ruby</code> <code class="n">at</code>
+<code class="lineno">11</code> <code class="o">/</code><code class="n">System</code><code class="o">/</code><code class="n">Library</code><code class="o">/</code><code class="n">Frameworks</code><code class="o">/</code><code class="n">Ruby</code><code class="p">.</code><code class="n">framework</code><code class="o">/</code><code class="n">Versions</code><code class="o">/</code>1<code class="p">.</code>8<code class="o">/</code>
+<code class="lineno">12</code>   <code class="n">usr</code><code class="o">/</code><code class="n">lib</code><code class="o">/</code><code class="n">ruby</code><code class="o">/</code><code class="n">ruby</code><code class="p">.</code><code class="n">h</code>
+<code class="lineno">13</code> <code class="n">Gem</code> <code class="n">files</code> <code class="n">will</code> <code class="n">remain</code> <code class="n">installed</code> <code class="n">in</code>
+<code class="lineno">14</code>   <code class="o">/</code><code class="n">Library</code><code class="o">/</code><code class="n">Ruby</code><code class="o">/</code><code class="n">Gems</code><code class="o">/</code>1<code class="p">.</code>8<code class="o">/</code><code class="n">gems</code><code class="o">/</code><code class="n">ffi</code><code class="o">-</code>1<code class="p">.</code>0<code class="p">.</code>7 <code class="k">for</code> <code class="n">inspection</code><code class="p">.</code>
+<code class="lineno">15</code> <code class="n">Results</code> <code class="n">logged</code> <code class="n">to</code>
+<code class="lineno">16</code>   <code class="o">/</code><code class="n">Library</code><code class="o">/</code><code class="n">Ruby</code><code class="o">/</code><code class="n">Gems</code><code class="o">/</code>1<code class="p">.</code>8<code class="o">/</code><code class="n">gems</code><code class="o">/</code><code class="n">ffi</code><code class="o">-</code>1<code class="p">.</code>0<code class="p">.</code>7<code class="o">/</code><code class="n">ext</code><code class="o">/</code><code class="n">ffi_c</code><code class="o">/</code><code class="n">gem_make</code><code class="p">.</code><code class="n">out</code>
+</pre></div>
+
+</div>
+
+<p>Fortunately, it is easy to fix. Install OSX GCC Installer or Xcode (see previous chapters).</p>
+
+<p>Try again:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">sudo</code> <code class="n">gem</code> <code class="n">install</code> <code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">ri</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">rdoc</code>
+<code class="lineno">2</code> <code class="p">(...)</code>
+<code class="lineno">3</code> <code class="n">Successfully</code> <code class="n">installed</code> <code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code><code class="o">-</code>0<code class="p">.</code>3<code class="p">.</code>2
+<code class="lineno">4</code> <code class="p">(...)</code>
+</pre></div>
+
+</div>
+
+<h4 id="firefox-with-watir-webdriver-on-106">Firefox with watir-webdriver on 10.6</h4>
+
+<div class="image-with-caption">
+  <p><img src="images/firefox.png" alt="Firefox 6 on Mac OS 10.6" /></p><p>Firefox 6 on Mac OS 10.6</p>
+</div>
+
+<p>Let&#x2019;s try to drive Firefox! To drive <a href="http://www.mozilla.com/en-US/firefox/new/">Firefox</a>, make sure you have it installed. Open our old friend IRB and type this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> $ <code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">ff</code>
+<code class="lineno"> 7</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">:</code>0<code class="n">x10101ee40</code> <code class="n">url</code><code class="p">=</code>"<code class="n">about</code><code class="p">:</code><code class="n">blank</code>" <code class="n">title</code><code class="p">=</code>""<code class="o">&gt;</code>
+<code class="lineno"> 8</code> 
+<code class="lineno"> 9</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">watir</code><code class="p">.</code><code class="n">com</code>"
+<code class="lineno">10</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">watir</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>"
+</pre></div>
+
+</div>
+
+<p>Great! We can drive Firefox.</p>
+
+<p>Maybe you will get this warning:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">ff</code>
+<code class="lineno">2</code> <code class="n">Warning</code><code class="p">:</code> <code class="n">multi_json</code> <code class="n">is</code> <code class="n">using</code> <code class="n">default</code> <code class="n">ok_json</code> <code class="n">engine</code><code class="p">.</code> <code class="n">Suggested</code>
+<code class="lineno">3</code>   <code class="n">action</code><code class="p">:</code> <code class="n">require</code> <code class="n">and</code> <code class="n">load</code> <code class="n">an</code> <code class="n">appropriate</code> <code class="n">JSON</code> <code class="n">library</code><code class="p">.</code>
+<code class="lineno">4</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">:</code>0<code class="n">x105035088</code> <code class="n">url</code><code class="p">=</code>"<code class="n">about</code><code class="p">:</code><code class="n">blank</code>" <code class="n">title</code><code class="p">=</code>""<code class="o">&gt;</code>
+</pre></div>
+
+</div>
+
+<p>You can get rid of the error message by installing json gem:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">sudo</code> <code class="n">gem</code> <code class="n">install</code> <code class="n">json</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">ri</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">rdoc</code>
+<code class="lineno">2</code> <code class="p">(...)</code>
+<code class="lineno">3</code> <code class="n">Successfully</code> <code class="n">installed</code> <code class="n">json</code><code class="o">-</code>1<code class="p">.</code>6<code class="p">.</code>4
+<code class="lineno">4</code> <code class="p">(...)</code>
+</pre></div>
+
+</div>
+
+<div class="image-with-caption">
+  <p><img src="images/webdriver-firefox.png" alt="watir-webdriver driving Firefox 4 on Mac OS 10.6" /></p><p>watir-webdriver driving Firefox 4 on Mac OS 10.6</p>
+</div>
+
+<h4 id="firefox-with-watir-webdriver-on-105">Firefox with watir-webdriver on 10.5</h4>
+
+<p>There is a problem with driving Firefox 4+ on 10.5:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">irb</code>
+<code class="lineno">2</code> 
+<code class="lineno">3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno">4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno">5</code> 
+<code class="lineno">6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">ff</code>
+<code class="lineno">7</code> <code class="n">Selenium</code><code class="p">::</code><code class="n">WebDriver</code><code class="p">::</code><code class="n">Error</code><code class="p">::</code><code class="n">WebDriverError</code><code class="p">:</code> <code class="n">unable</code> <code class="n">to</code> <code class="n">start</code>
+<code class="lineno">8</code>   <code class="n">Firefox</code> <code class="n">cleanly</code><code class="p">,</code> <code class="n">args</code><code class="p">:</code> <code class="p">[</code>"<code class="o">-</code><code class="n">silent</code>"<code class="p">]</code>
+<code class="lineno">9</code> <code class="p">(...)</code>
+</pre></div>
+
+</div>
+
+<p>Take a look at https://github.com/jnicklas/capybara/issues/313 for more detail.</p>
+
+<p>The easiest way to fix it is to uninstall the current version of Firefox, and install Firefox 3.6.22. I could not find how to download Firefox 4 or 5, so I did not test with them.</p>
+
+<h4 id="chrome-with-watir-webdriver-1">Chrome with watir-webdriver</h4>
+
+<div class="image-with-caption">
+  <p><img src="images/chrome.png" alt="Chrome 13 on Mac OS 10.6" /></p><p>Chrome 13 on Mac OS 10.6</p>
+</div>
+
+<p>Let&#x2019;s see if it can really drive Chrome too. To drive <a href="http://www.google.com/chrome/">Chrome</a>, make sure you have it installed.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> $ <code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">chrome</code>
+<code class="lineno"> 7</code> <code class="n">Selenium</code><code class="p">::</code><code class="n">WebDriver</code><code class="p">::</code><code class="n">Error</code><code class="p">::</code><code class="n">WebDriverError</code><code class="p">:</code> <code class="n">Unable</code> <code class="n">to</code> <code class="nb">find</code> <code class="n">the</code>
+<code class="lineno"> 8</code> <code class="n">chromedriver</code> <code class="n">executable</code><code class="p">.</code> <code class="n">Please</code> <code class="n">download</code> <code class="n">the</code> <code class="n">server</code> <code class="n">from</code>
+<code class="lineno"> 9</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">chromium</code><code class="o">/</code><code class="n">downloads</code><code class="o">/</code><code class="n">list</code> <code class="n">and</code> <code class="n">place</code> <code class="n">it</code>
+<code class="lineno">10</code> <code class="n">somewhere</code> <code class="n">on</code> <code class="n">your</code> <code class="n">PATH</code><code class="p">.</code> <code class="n">More</code> <code class="n">info</code> <code class="n">at</code>
+<code class="lineno">11</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">selenium</code><code class="o">/</code><code class="n">wiki</code><code class="o">/</code><code class="n">ChromeDriver</code><code class="p">.</code>
+</pre></div>
+
+</div>
+
+<p>Looks like we have to install something called <em>chromedriver executable</em>. Fortunately, the error message is pretty clear. Download <code>chromedriver_mac_14.0.836.0.zip</code> (or newer version, the description should be <em>ChromeDriver server for Mac OS X</em>) from<br /><em>http://code.google.com/p/chromedriver/downloads/list</em> and unzip it (with mouse double-click, for example). You will get a file named <code>chromedriver</code>. Put it <em>somewhere on your <code>PATH</code></em>, as the error message said. If you have no idea what that means, read on. To find out where to put <code>chromedriver</code> file, type this in Terminal:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">echo</code> $<code class="n">PATH</code>
+<code class="lineno">2</code> <code class="o">/</code><code class="n">usr</code><code class="o">/</code><code class="n">bin</code><code class="p">:</code><code class="o">/</code><code class="n">bin</code><code class="p">:</code><code class="o">/</code><code class="n">usr</code><code class="o">/</code><code class="n">sbin</code><code class="p">:</code><code class="o">/</code><code class="n">sbin</code><code class="p">:</code><code class="o">/</code><code class="n">usr</code><code class="o">/</code><code class="n">local</code><code class="o">/</code><code class="n">bin</code><code class="p">:</code><code class="o">/</code><code class="n">usr</code><code class="o">/</code><code class="n">X11</code><code class="o">/</code><code class="n">bin</code>
+</pre></div>
+
+</div>
+
+<p>So, in my case, these folders are on my <code>PATH</code>: <code>/usr/bin</code>, <code>/bin</code>, <code>/usr/sbin</code>, <code>/sbin</code>, <code>/usr/local/bin</code> and <code>/usr/X11/bin</code>. <code>/usr/bin</code> looks like a good place to put <code>chromedriver</code> file. To open the folder, go to <em>Finder &gt; Go &gt; Go to Folder &gt; /usr/bin &gt; Go</em>. Copy the file there. You will have to provide admin password.</p>
+
+<p>Let&#x2019;s try again:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> $ <code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">chrome</code>
+<code class="lineno"> 7</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">:</code>0<code class="n">x12d610c</code> <code class="n">url</code><code class="p">=</code>"<code class="n">about</code><code class="p">:</code><code class="n">blank</code>" <code class="n">title</code><code class="p">=</code>"<code class="n">about</code><code class="p">:</code><code class="n">blank</code>"<code class="o">&gt;</code>
+<code class="lineno"> 8</code> 
+<code class="lineno"> 9</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">watir</code><code class="p">.</code><code class="n">com</code>"
+<code class="lineno">10</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">watir</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>"
+</pre></div>
+
+</div>
+
+<p>Finally! It works!</p>
+
+<div class="image-with-caption">
+  <p><img src="images/webdriver-chrome.png" alt="watir-webdriver driving Chrome 12 on Mac OS 10.5" /></p><p>watir-webdriver driving Chrome 12 on Mac OS 10.5</p>
+</div>
+
+<h4 id="java-on-107">Java on 10.7</h4>
+
+<p>To drive Opera, you need Java. It is not installed by default on Mac OS X 10.7. To install it type <code>java -version</code> in Terminal:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">java</code> <code class="o">-</code><code class="n">version</code>
+<code class="lineno">2</code> <code class="n">No</code> <code class="n">Java</code> <code class="n">runtime</code> <code class="n">present</code><code class="p">,</code> <code class="n">requesting</code> <code class="n">install</code><code class="p">.</code>
+</pre></div>
+
+</div>
+
+<p>You will get <code>No Java runtime present, requesting install</code> message and a popup window will appear.</p>
+
+<div class="image-with-caption">
+  <p><img src="images/java.png" alt="Install Java" /></p><p>Install Java</p>
+</div>
+
+<p>Click button <em>Install</em> and Java will install. Check if Java is installed with <code>java -version</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">java</code> <code class="o">-</code><code class="n">version</code>
+<code class="lineno">2</code> <code class="n">java</code> <code class="n">version</code> "1<code class="p">.</code>6<code class="p">.</code>0<code class="n">_29</code>"
+<code class="lineno">3</code> <code class="n">Java</code><code class="p">(</code><code class="n">TM</code><code class="p">)</code> <code class="n">SE</code> <code class="n">Runtime</code> <code class="n">Environment</code> <code class="p">(</code><code class="n">build</code> 1<code class="p">.</code>6<code class="p">.</code>0<code class="n">_29</code><code class="o">-</code><code class="n">b11</code><code class="o">-</code>402<code class="o">-</code>11<code class="n">M3527</code><code class="p">)</code>
+<code class="lineno">4</code> <code class="n">Java</code> <code class="n">HotSpot</code><code class="p">(</code><code class="n">TM</code><code class="p">)</code> 64<code class="o">-</code><code class="n">Bit</code> <code class="n">Server</code> <code class="n">VM</code> <code class="p">(</code><code class="n">build</code> 20<code class="p">.</code>4<code class="o">-</code><code class="n">b02</code><code class="o">-</code>402<code class="p">,</code> <code class="n">mixed</code> <code class="n">mode</code><code class="p">)</code>
+</pre></div>
+
+</div>
+
+<h4 id="java-on-106-and-105">Java on 10.6 and 10.5</h4>
+
+<p>To drive Opera, you need Java. Fortunately, it is already installed. All you have to do is check if it is installed with <code>java -version</code>:</p>
+
+<p>On 10.6 you should get this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">java</code> <code class="o">-</code><code class="n">version</code>
+<code class="lineno">2</code> <code class="n">java</code> <code class="n">version</code> "1<code class="p">.</code>6<code class="p">.</code>0<code class="n">_26</code>"
+<code class="lineno">3</code> <code class="n">Java</code><code class="p">(</code><code class="n">TM</code><code class="p">)</code> <code class="n">SE</code> <code class="n">Runtime</code> <code class="n">Environment</code> <code class="p">(</code><code class="n">build</code> 1<code class="p">.</code>6<code class="p">.</code>0<code class="n">_26</code><code class="o">-</code><code class="n">b03</code><code class="o">-</code>384<code class="o">-</code>10<code class="n">M3425</code><code class="p">)</code>
+<code class="lineno">4</code> <code class="n">Java</code> <code class="n">HotSpot</code><code class="p">(</code><code class="n">TM</code><code class="p">)</code> 64<code class="o">-</code><code class="n">Bit</code> <code class="n">Server</code> <code class="n">VM</code> <code class="p">(</code><code class="n">build</code> 20<code class="p">.</code>1<code class="o">-</code><code class="n">b02</code><code class="o">-</code>384<code class="p">,</code> <code class="n">mixed</code> <code class="n">mode</code><code class="p">)</code>
+</pre></div>
+
+</div>
+
+<p>On 10.5 you should get this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">java</code> <code class="n">version</code> "1<code class="p">.</code>5<code class="p">.</code>0<code class="n">_30</code>"
+<code class="lineno">2</code> <code class="n">Java</code><code class="p">(</code><code class="n">TM</code><code class="p">)</code> 2 <code class="n">Runtime</code> <code class="n">Environment</code><code class="p">,</code> <code class="n">Standard</code> <code class="n">Edition</code>
+<code class="lineno">3</code>   <code class="p">(</code><code class="n">build</code> 1<code class="p">.</code>5<code class="p">.</code>0<code class="n">_30</code><code class="o">-</code><code class="n">b03</code><code class="o">-</code>389<code class="o">-</code>9<code class="n">M3425</code><code class="p">)</code>
+<code class="lineno">4</code> <code class="n">Java</code> <code class="n">HotSpot</code><code class="p">(</code><code class="n">TM</code><code class="p">)</code> <code class="n">Client</code> <code class="n">VM</code> <code class="p">(</code><code class="n">build</code> 1<code class="p">.</code>5<code class="p">.</code>0<code class="n">_30</code><code class="o">-</code>161<code class="p">,</code> <code class="n">mixed</code> <code class="n">mode</code><code class="p">)</code>
+</pre></div>
+
+</div>
+
+<h4 id="opera-with-watir-webdriver">Opera with watir-webdriver</h4>
+
+<div class="image-with-caption">
+  <p><img src="images/opera.png" alt="Opera 11.51 on Mac 10.6" /></p><p>Opera 11.51 on Mac 10.6</p>
+</div>
+
+<p>Let&#x2019;s see how it drives Opera. To drive <a href="http://www.opera.com/">Opera</a>, make sure you have it installed.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> $ <code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">opera</code>
+<code class="lineno"> 7</code> <code class="n">Selenium</code><code class="p">::</code><code class="n">WebDriver</code><code class="p">::</code><code class="n">Error</code><code class="p">::</code><code class="n">WebDriverError</code><code class="p">:</code> <code class="n">Unable</code> <code class="n">to</code> <code class="nb">find</code> <code class="n">the</code>
+<code class="lineno"> 8</code> <code class="n">Selenium</code> <code class="n">server</code> <code class="n">jar</code><code class="p">.</code> <code class="n">Please</code> <code class="n">download</code> <code class="n">the</code> <code class="n">standalone</code> <code class="n">server</code> <code class="n">from</code>
+<code class="lineno"> 9</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">selenium</code><code class="o">/</code><code class="n">downloads</code><code class="o">/</code><code class="n">list</code> <code class="n">and</code> <code class="n">set</code> <code class="n">the</code>
+<code class="lineno">10</code> <code class="n">SELENIUM_SERVER_JAR</code> <code class="n">environmental</code> <code class="n">variable</code> <code class="n">to</code> <code class="n">its</code> <code class="n">location</code><code class="p">.</code>
+<code class="lineno">11</code> <code class="n">More</code> <code class="n">info</code> <code class="n">at</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">selenium</code><code class="o">/</code><code class="n">wiki</code><code class="o">/</code><code class="n">OperaDriver</code><code class="p">.</code>
+</pre></div>
+
+</div>
+
+<p>Error message similar to the one when we first tried to open Chrome. The solution is similar too. We have to download a file, put it somewhere and point a variable to it. Do not worry, it sounds more complicated than it really is. Fortunately again, the error message says it all. Go to <em>http://code.google.com/p/selenium/downloads/list</em> and download <code>selenium-server-standalone-2.5.0.jar</code> (or newer version). Since I have put <code>chromedriver</code> file in <code>/usr/bin</code>, I will put <code>selenium-server-standalone-2.5.0.jar</code> file there too. You will have to provide admin password when copying the file.</p>
+
+<p>The last step is setting <code>SELENIUM_SERVER_JAR</code> environmental variable. Create (if the file does not exist) or edit <code>.bash_profile</code> file in your home folder (<code>/Users/zeljko</code> in my case) with your favorite text editor. Add this line to the file:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code>  <code class="n">export</code> <code class="n">SELENIUM_SERVER_JAR</code><code class="p">=</code><code class="o">/</code><code class="n">usr</code><code class="o">/</code><code class="n">bin</code><code class="o">/</code><code class="n">selenium</code><code class="o">-</code><code class="n">server</code><code class="o">-</code><code class="n">standalone</code><code class="o">-</code>2<code class="p">.</code>5<code class="p">.</code>0<code class="p">.</code><code class="n">jar</code>
+</pre></div>
+
+</div>
+
+<p>If you just got lost, I have step by step guide how to do it. Open new Terminal tab or window (it should open in your home folder by default, <code>/Users/zeljko</code> in my case) and type <code>nano .bash_profile</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">nano</code> <code class="p">.</code><code class="n">bash_profile</code>
+</pre></div>
+
+</div>
+
+<p><em>GNU nano</em> text editor will open. Paste (cmd-v, for example) <code>export SELENIUM_SERVER_JAR...</code> line. Exit <em>GNU nano</em> and save the file with <em>control+x</em>. Press <em>y</em> when it asks <code>Save modified buffer (ANSWERING "No" WILL DESTROY CHANGES)?</code> and press <em>Enter</em> when it displays <code>File Name to Write: .bash_profile</code> or <code>Save modified buffer (ANSWERING "No" WILL DESTROY CHANGES)?</code> (text is different if the file already exists or not).</p>
+
+<div class="image-with-caption">
+  <p><img src="images/nano.png" alt="GNU nano asking should it save changes to `.bash_profile` file" /></p><p>GNU nano asking should it save changes to `.bash_profile` file</p>
+</div>
+
+<p>If you have done everything right, GNU nano will close and you will see normal Terminal window. We can check if the line is written to <code>.bash_profile</code> file:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="nb">cat</code> <code class="p">.</code><code class="n">bash_profile</code>
+<code class="lineno">2</code> <code class="n">export</code> <code class="n">SELENIUM_SERVER_JAR</code><code class="p">=</code><code class="o">/</code><code class="n">usr</code><code class="o">/</code><code class="n">bin</code><code class="o">/</code><code class="n">selenium</code><code class="o">-</code><code class="n">server</code><code class="o">-</code><code class="n">standalone</code><code class="o">-</code>2<code class="p">.</code>5<code class="p">.</code>0<code class="p">.</code><code class="n">jar</code>
+</pre></div>
+
+</div>
+
+<p>Let&#x2019;s drive Opera, finally! Open new Terminal window or tab (this is important, already opened windows or tabs would not see <code>SELENIUM_SERVER_JAR</code> variable).</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">irb</code>
+<code class="lineno">2</code> 
+<code class="lineno">3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno">4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno">5</code> 
+<code class="lineno">6</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">opera</code>
+<code class="lineno">7</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">:</code>0<code class="n">x1017f6a28</code> <code class="n">url</code><code class="p">=</code>"<code class="n">opera</code><code class="p">:</code><code class="n">debug</code>" <code class="n">title</code><code class="p">=</code>"<code class="n">Connect</code> <code class="n">to</code> <code class="n">Debugger</code>"<code class="o">&gt;</code>
+</pre></div>
+
+</div>
+
+<div class="image-with-caption">
+  <p><img src="images/webdriver-opera.png" alt="watir-webdriver gem drives Opera 11.51 on Mac 10.6" /></p><p>watir-webdriver gem drives Opera 11.51 on Mac 10.6</p>
+</div>
+
+<h3 id="ubuntu-linux-1104">Ubuntu Linux 11.04</h3>
+
+<p>
+  <em>You will need internet access if you want to follow examples in this chapter.</em>
+</p>
+
+<div class="image-with-caption">
+  <p><img src="images/desktop.png" alt="Ubuntu Linux 11.04 default desktop" /></p><p>Ubuntu Linux 11.04 default desktop</p>
+</div>
+
+<p>Machine is a clean installation of Ubuntu Linux 11.04, fully patched, 512 MB RAM. Firefox 5.0, Chrome 12, Opera 11.50.</p>
+
+<h4 id="ruby-2">Ruby</h4>
+
+<p>Let&#x2019;s see if Ubuntu comes with Ruby installed. Open Terminal (<em>Applications &gt; Accessories &gt; Terminal</em>) and type <code>ruby -v</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">ruby</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> <code class="n">The</code> <code class="n">program</code> <code class="s">'ruby'</code> <code class="n">is</code> <code class="n">currently</code> <code class="n">not</code> <code class="n">installed</code><code class="p">.</code> <code class="n">You</code> <code class="n">can</code> <code class="n">install</code> <code class="n">it</code>
+<code class="lineno">3</code> <code class="n">by</code> <code class="n">typing</code><code class="p">:</code>
+<code class="lineno">4</code> <code class="n">sudo</code> <code class="n">apt</code><code class="o">-</code><code class="n">get</code> <code class="n">install</code> <code class="n">ruby</code>
+</pre></div>
+
+</div>
+
+<p>Install it with <code>sudo apt-get install ruby</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">sudo</code> <code class="n">apt</code><code class="o">-</code><code class="n">get</code> <code class="n">install</code> <code class="n">ruby</code>
+<code class="lineno">2</code> <code class="p">(...)</code>
+<code class="lineno">3</code> <code class="n">Setting</code> <code class="n">up</code> <code class="n">libruby1</code><code class="p">.</code>8 <code class="p">(</code>1<code class="p">.</code>8<code class="p">.</code>7<code class="p">.</code>302<code class="o">-</code>2<code class="p">)</code> <code class="p">...</code>
+<code class="lineno">4</code> <code class="n">Setting</code> <code class="n">up</code> <code class="n">ruby1</code><code class="p">.</code>8 <code class="p">(</code>1<code class="p">.</code>8<code class="p">.</code>7<code class="p">.</code>302<code class="o">-</code>2<code class="p">)</code> <code class="p">...</code>
+<code class="lineno">5</code> <code class="n">Setting</code> <code class="n">up</code> <code class="n">ruby</code> <code class="p">(</code>4<code class="p">.</code>5<code class="p">)</code> <code class="p">...</code>
+<code class="lineno">6</code> <code class="p">(...)</code>
+</pre></div>
+
+</div>
+
+<p>Check the version with <code>ruby -v</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">ruby</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> <code class="n">ruby</code> 1<code class="p">.</code>8<code class="p">.</code>7 <code class="p">(</code>2010<code class="o">-</code>08<code class="o">-</code>16 <code class="n">patchlevel</code> 302<code class="p">)</code> <code class="p">[</code><code class="n">i686</code><code class="o">-</code><code class="n">linux</code><code class="p">]</code>
+</pre></div>
+
+</div>
+
+<p>Ruby 1.8.7 is pretty good, but 1.9.2 would be better. Since we just want to get Watir installed the easiest possible way, we will user Ruby 1.8.7.</p>
+
+<h4 id="rubygems-1">RubyGems</h4>
+
+<p>Let&#x2019;s see the version of RubyGems we got with Ruby with <code>gem -v</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">gem</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> <code class="n">The</code> <code class="n">program</code> <code class="s">'gem'</code> <code class="n">is</code> <code class="n">currently</code> <code class="n">not</code> <code class="n">installed</code><code class="p">.</code> <code class="n">You</code> <code class="n">can</code> <code class="n">install</code> <code class="n">it</code>
+<code class="lineno">3</code> <code class="n">by</code> <code class="n">typing</code><code class="p">:</code>
+<code class="lineno">4</code> <code class="n">sudo</code> <code class="n">apt</code><code class="o">-</code><code class="n">get</code> <code class="n">install</code> <code class="n">rubygems1</code><code class="p">.</code>8
+</pre></div>
+
+</div>
+
+<p>Looks like we did not get any version installed. We will install RubyGems with <code>apt-get</code>, since that is the easiest way:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">sudo</code> <code class="n">apt</code><code class="o">-</code><code class="n">get</code> <code class="n">install</code> <code class="n">rubygems1</code><code class="p">.</code>8
+<code class="lineno">2</code> <code class="p">(...)</code>
+<code class="lineno">3</code> <code class="n">Setting</code> <code class="n">up</code> <code class="n">ruby1</code><code class="p">.</code>8<code class="o">-</code><code class="n">dev</code> <code class="p">(</code>1<code class="p">.</code>8<code class="p">.</code>7<code class="p">.</code>302<code class="o">-</code>2<code class="p">)</code> <code class="p">...</code>
+<code class="lineno">4</code> <code class="n">Setting</code> <code class="n">up</code> <code class="n">rubygems1</code><code class="p">.</code>8 <code class="p">(</code>1<code class="p">.</code>3<code class="p">.</code>7<code class="o">-</code>3<code class="p">)</code> <code class="p">...</code>
+</pre></div>
+
+</div>
+
+<p>Ask RubyGems for it&#x2019;s version with <code>gem -v</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">gem</code> <code class="o">-</code><code class="n">v</code>
+<code class="lineno">2</code> 1<code class="p">.</code>3<code class="p">.</code>7
+</pre></div>
+
+</div>
+
+<p>RubyGems 1.3.7 is really old (<a href="https://rubygems.org/gems/rubygems-update/versions">May 13, 2010</a>). Let&#x2019;s try to update it the usual way, with <code>gem update --system</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> $ <code class="n">gem</code> <code class="n">update</code> <code class="o">--</code><code class="n">system</code>
+<code class="lineno"> 2</code> <code class="n">ERROR</code><code class="p">:</code>  <code class="n">While</code> <code class="n">executing</code> <code class="n">gem</code> <code class="p">...</code> <code class="p">(</code><code class="n">RuntimeError</code><code class="p">)</code>
+<code class="lineno"> 3</code> <code class="n">gem</code> <code class="n">update</code> <code class="o">--</code><code class="n">system</code> <code class="n">is</code> <code class="n">disabled</code> <code class="n">on</code> <code class="n">Debian</code><code class="p">,</code> <code class="n">because</code> <code class="n">it</code> <code class="n">will</code>
+<code class="lineno"> 4</code> <code class="n">overwrite</code> <code class="n">the</code> <code class="n">content</code> <code class="n">of</code> <code class="n">the</code> <code class="n">rubygems</code> <code class="n">Debian</code> <code class="n">package</code><code class="p">,</code> <code class="n">and</code>
+<code class="lineno"> 5</code> <code class="n">might</code> <code class="k">break</code> <code class="n">your</code> <code class="n">Debian</code> <code class="n">system</code> <code class="n">in</code> <code class="n">subtle</code> <code class="n">ways</code><code class="p">.</code> <code class="n">The</code>
+<code class="lineno"> 6</code> <code class="n">Debian</code><code class="o">-</code><code class="n">supported</code> <code class="n">way</code> <code class="n">to</code> <code class="n">update</code> <code class="n">rubygems</code> <code class="n">is</code> <code class="n">through</code> <code class="n">apt</code><code class="o">-</code><code class="n">get</code><code class="p">,</code>
+<code class="lineno"> 7</code> <code class="n">using</code> <code class="n">Debian</code> <code class="n">official</code> <code class="n">repositories</code><code class="p">.</code> <code class="n">If</code> <code class="n">you</code> <code class="n">really</code> <code class="n">know</code> <code class="n">what</code>
+<code class="lineno"> 8</code> <code class="n">you</code> <code class="n">are</code> <code class="n">doing</code><code class="p">,</code> <code class="n">you</code> <code class="n">can</code> <code class="n">still</code> <code class="n">update</code> <code class="n">rubygems</code> <code class="n">by</code> <code class="n">setting</code> <code class="n">the</code>
+<code class="lineno"> 9</code> <code class="n">REALLY_GEM_UPDATE_SYSTEM</code> <code class="n">environment</code> <code class="n">variable</code><code class="p">,</code> <code class="n">but</code> <code class="n">please</code>
+<code class="lineno">10</code> <code class="n">remember</code> <code class="n">that</code> <code class="n">this</code> <code class="n">is</code> <code class="n">completely</code> <code class="n">unsupported</code> <code class="n">by</code> <code class="n">Debian</code><code class="p">.</code>
+</pre></div>
+
+</div>
+
+<p>Since I do not <em>really</em> know what I am doing, I will leave RubyGems at version 1.3.7 and hope everything will work.</p>
+
+<h4 id="watir-webdriver-2">watir-webdriver</h4>
+
+<p>I think that Watir-webdriver gem is the future of Watir. In short, it can drive Firefox, Chrome and Opera.</p>
+
+<p>Install watir-webdriver gem with <code>sudo gem install watir-webdriver --no-ri --no-rdoc</code>.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">sudo</code> <code class="n">gem</code> <code class="n">install</code> <code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">ri</code> <code class="o">--</code><code class="n">no</code><code class="o">-</code><code class="n">rdoc</code>
+<code class="lineno">2</code> <code class="p">(...)</code>
+<code class="lineno">3</code> <code class="n">Successfully</code> <code class="n">installed</code> <code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code><code class="o">-</code>0<code class="p">.</code>2<code class="p">.</code>8
+<code class="lineno">4</code> 4 <code class="n">gems</code> <code class="n">installed</code>
+</pre></div>
+
+</div>
+
+<h4 id="firefox-with-watir-webdriver-1">Firefox with watir-webdriver</h4>
+
+<div class="image-with-caption">
+  <p><img src="images/firefox.png" alt="Firefox on Ubuntu 11.04" /></p><p>Firefox on Ubuntu 11.04</p>
+</div>
+
+<p>Since Firefox is installed by default on Ubuntu, you do not have to install it.</p>
+
+<p>Let&#x2019;s check if it can drive Firefox:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> $ <code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">rubygems</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 7</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 8</code> 
+<code class="lineno"> 9</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">ff</code>
+<code class="lineno">10</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">:</code>0<code class="n">x</code><code class="p">..</code><code class="n">fb734a4d8</code> <code class="n">url</code><code class="p">=</code>"<code class="n">about</code><code class="p">:</code><code class="n">blank</code>" <code class="n">title</code><code class="p">=</code>""<code class="o">&gt;</code>
+<code class="lineno">11</code> 
+<code class="lineno">12</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">watir</code><code class="p">.</code><code class="n">com</code>"
+<code class="lineno">13</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">watir</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>"
+</pre></div>
+
+</div>
+
+<div class="image-with-caption">
+  <p><img src="images/webdriver-firefox.png" alt="Watir-webdriver drives Firefox on Ubuntu 11.04" /></p><p>Watir-webdriver drives Firefox on Ubuntu 11.04</p>
+</div>
+
+<p>No problem here, works just fine.</p>
+
+<h4 id="chrome-with-watir-webdriver-2">Chrome with watir-webdriver</h4>
+
+<div class="image-with-caption">
+  <p><img src="images/chrome.png" alt="Chrome on Ubuntu 11.04" /></p><p>Chrome on Ubuntu 11.04</p>
+</div>
+
+<p>Now, lets see if it can really drive Chrome too. Ubuntu does not have Chrome installed by default, so you have to install it yourself. Download it from <em><a href="http://www.google.com/chrome">google.com/chrome</a></em>. After installation Chrome will appear at <em>Applications &gt; Internet &gt; Chrome</em>.</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> $ <code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">rubygems</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 7</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 8</code> 
+<code class="lineno"> 9</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">chrome</code>
+<code class="lineno">10</code> <code class="n">Selenium</code><code class="p">::</code><code class="n">WebDriver</code><code class="p">::</code><code class="n">Error</code><code class="p">::</code><code class="n">WebDriverError</code><code class="p">:</code> <code class="n">Unable</code> <code class="n">to</code> <code class="nb">find</code> <code class="n">the</code>
+<code class="lineno">11</code> <code class="n">chromedriver</code> <code class="n">executable</code><code class="p">.</code> <code class="n">Please</code> <code class="n">download</code> <code class="n">the</code> <code class="n">server</code> <code class="n">from</code>
+<code class="lineno">12</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">chromium</code><code class="o">/</code><code class="n">downloads</code><code class="o">/</code><code class="n">list</code> <code class="n">and</code> <code class="n">place</code> <code class="n">it</code>
+<code class="lineno">13</code> <code class="n">somewhere</code> <code class="n">on</code> <code class="n">your</code> <code class="n">PATH</code><code class="p">.</code> <code class="n">More</code> <code class="n">info</code> <code class="n">at</code>
+<code class="lineno">14</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">selenium</code><code class="o">/</code><code class="n">wiki</code><code class="o">/</code><code class="n">ChromeDriver</code><code class="p">.</code>
+<code class="lineno">15</code> <code class="p">(...)</code>
+</pre></div>
+
+</div>
+
+<p>Looks like we have to install something called <em>chromedriver executable</em>. Fortunately, the error message is pretty clear. Download <code>chromedriver_linux32_14.0.836.0.zip</code> (or newer version, the description should be <em>ChromeDriver server for linux32</em>) from<br /><em>http://code.google.com/p/chromium/downloads/list</em> and unzip it (mouse right click and then <em>Extract Here</em>, for example). You will get a file named <code>chromedriver</code>. Put it <em>somewhere on your <code>PATH</code></em>, as the error message said.</p>
+
+<p>The easiest way to do it on Ubuntu is to create a folder called <code>bin</code> in your home folder (<code>/home/zeljko/bin</code> in my case). You have to reboot (or at least log out and then log in, but I have not checked that) and by some magic (provided by <code>/home/zeljko/.profile</code> file in my case) <code>/home/zeljko/bin</code> folder will appear in your <code>PATH</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">echo</code> $<code class="n">PATH</code>
+<code class="lineno">2</code> <code class="o">/</code><code class="n">home</code><code class="o">/</code><code class="n">zeljko</code><code class="o">/</code><code class="n">bin</code><code class="p">:</code><code class="o">/</code><code class="n">usr</code><code class="o">/</code><code class="n">local</code><code class="o">/</code><code class="n">sbin</code><code class="p">:</code><code class="o">/</code><code class="n">usr</code><code class="o">/</code><code class="n">local</code><code class="o">/</code><code class="n">bin</code><code class="p">:</code><code class="o">/</code><code class="n">usr</code><code class="o">/</code><code class="n">sbin</code><code class="p">:</code><code class="o">/</code><code class="n">usr</code><code class="o">/</code><code class="n">bin</code><code class="p">:</code>
+<code class="lineno">3</code> <code class="o">/</code><code class="n">sbin</code><code class="p">:</code><code class="o">/</code><code class="n">bin</code><code class="p">:</code><code class="o">/</code><code class="n">usr</code><code class="o">/</code><code class="n">games</code>
+</pre></div>
+
+</div>
+
+<p>Let&#x2019;s drive Chrome, finally:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> $ <code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">rubygems</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 7</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 8</code> 
+<code class="lineno"> 9</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">chrome</code>
+<code class="lineno">10</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">:</code>0<code class="n">x</code><code class="p">..</code><code class="n">fb743b7d4</code> <code class="n">url</code><code class="p">=</code>"<code class="n">about</code><code class="p">:</code><code class="n">blank</code>" <code class="n">title</code><code class="p">=</code>"<code class="n">about</code><code class="p">:</code><code class="n">blank</code>"<code class="o">&gt;</code>
+<code class="lineno">11</code> 
+<code class="lineno">12</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">watir</code><code class="p">.</code><code class="n">com</code>"
+<code class="lineno">13</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">watir</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>"
+</pre></div>
+
+</div>
+
+<p>And it really works!</p>
+
+<div class="image-with-caption">
+  <p><img src="images/webdriver-chrome.png" alt="Watir-webdriver drives Chrome on Ubuntu 11.04" /></p><p>Watir-webdriver drives Chrome on Ubuntu 11.04</p>
+</div>
+
+<h4 id="java-1">Java</h4>
+
+<p>To drive Opera, you will have to install Java first. Let&#x2019;s check if Java is already installed with <code>java -version</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">java</code>
+<code class="lineno">2</code> <code class="n">The</code> <code class="n">program</code> <code class="s">'java'</code> <code class="n">can</code> <code class="n">be</code> <code class="n">found</code> <code class="n">in</code> <code class="n">the</code> <code class="n">following</code> <code class="n">packages</code><code class="p">:</code>
+<code class="lineno">3</code>  <code class="o">*</code> <code class="n">gcj</code><code class="o">-</code>4<code class="p">.</code>4<code class="o">-</code><code class="n">jre</code><code class="o">-</code><code class="n">headless</code>
+<code class="lineno">4</code>  <code class="o">*</code> <code class="n">gcj</code><code class="o">-</code>4<code class="p">.</code>5<code class="o">-</code><code class="n">jre</code><code class="o">-</code><code class="n">headless</code>
+<code class="lineno">5</code>  <code class="o">*</code> <code class="n">openjdk</code><code class="o">-</code>6<code class="o">-</code><code class="n">jre</code><code class="o">-</code><code class="n">headless</code>
+<code class="lineno">6</code> <code class="n">Try</code><code class="p">:</code> <code class="n">sudo</code> <code class="n">apt</code><code class="o">-</code><code class="n">get</code> <code class="n">install</code> <code class="o">&lt;</code><code class="n">selected</code> <code class="n">package</code><code class="o">&gt;</code>
+</pre></div>
+
+</div>
+
+<p>Looks like we will have to install Java. Install it with <code>sudo apt-get install openjdk-6-jre-headless</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">sudo</code> <code class="n">apt</code><code class="o">-</code><code class="n">get</code> <code class="n">install</code> <code class="n">openjdk</code><code class="o">-</code>6<code class="o">-</code><code class="n">jre</code><code class="o">-</code><code class="n">headless</code>
+<code class="lineno">2</code> <code class="p">(...)</code>
+<code class="lineno">3</code> <code class="n">Setting</code> <code class="n">up</code> <code class="n">openjdk</code><code class="o">-</code>6<code class="o">-</code><code class="n">jre</code><code class="o">-</code><code class="n">lib</code> <code class="p">(</code>6<code class="n">b22</code><code class="o">-</code>1<code class="p">.</code>10<code class="p">.</code>2<code class="o">-</code>0<code class="n">ubuntu1</code><code class="o">~</code>11<code class="p">.</code>04<code class="p">.</code>1<code class="p">)</code> <code class="p">...</code>
+<code class="lineno">4</code> <code class="n">Setting</code> <code class="n">up</code> <code class="n">icedtea</code><code class="o">-</code>6<code class="o">-</code><code class="n">jre</code><code class="o">-</code><code class="n">cacao</code> <code class="p">(</code>6<code class="n">b22</code><code class="o">-</code>1<code class="p">.</code>10<code class="p">.</code>2<code class="o">-</code>0<code class="n">ubuntu1</code><code class="o">~</code>11<code class="p">.</code>04<code class="p">.</code>1<code class="p">)</code> <code class="p">...</code>
+<code class="lineno">5</code> <code class="n">Setting</code> <code class="n">up</code> <code class="n">icedtea</code><code class="o">-</code>6<code class="o">-</code><code class="n">jre</code><code class="o">-</code><code class="n">jamvm</code> <code class="p">(</code>6<code class="n">b22</code><code class="o">-</code>1<code class="p">.</code>10<code class="p">.</code>2<code class="o">-</code>0<code class="n">ubuntu1</code><code class="o">~</code>11<code class="p">.</code>04<code class="p">.</code>1<code class="p">)</code> <code class="p">...</code>
+<code class="lineno">6</code> <code class="n">Setting</code> <code class="n">up</code> <code class="n">ca</code><code class="o">-</code><code class="n">certificates</code><code class="o">-</code><code class="n">java</code> <code class="p">(</code>20100412<code class="p">)</code> <code class="p">...</code>
+<code class="lineno">7</code> <code class="n">creating</code> <code class="o">/</code><code class="n">etc</code><code class="o">/</code><code class="n">ssl</code><code class="o">/</code><code class="n">certs</code><code class="o">/</code><code class="n">java</code><code class="o">/</code><code class="n">cacerts</code><code class="p">...</code>
+<code class="lineno">8</code> <code class="n">done</code><code class="p">.</code>
+</pre></div>
+
+</div>
+
+<p>Let&#x2019;s check if Java is really installed with <code>java -version</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">java</code> <code class="o">-</code><code class="n">version</code>
+<code class="lineno">2</code> <code class="n">java</code> <code class="n">version</code> "1<code class="p">.</code>6<code class="p">.</code>0<code class="n">_22</code>"
+<code class="lineno">3</code> <code class="n">OpenJDK</code> <code class="n">Runtime</code> <code class="n">Environment</code> <code class="p">(</code><code class="n">IcedTea6</code> 1<code class="p">.</code>10<code class="p">.</code>2<code class="p">)</code>
+<code class="lineno">4</code> <code class="p">(</code>6<code class="n">b22</code><code class="o">-</code>1<code class="p">.</code>10<code class="p">.</code>2<code class="o">-</code>0<code class="n">ubuntu1</code><code class="o">~</code>11<code class="p">.</code>04<code class="p">.</code>1<code class="p">)</code>
+<code class="lineno">5</code> <code class="n">OpenJDK</code> <code class="n">Client</code> <code class="n">VM</code> <code class="p">(</code><code class="n">build</code> 20<code class="p">.</code>0<code class="o">-</code><code class="n">b11</code><code class="p">,</code> <code class="n">mixed</code> <code class="n">mode</code><code class="p">,</code> <code class="n">sharing</code><code class="p">)</code>
+</pre></div>
+
+</div>
+
+<p>Looks good to me!</p>
+
+<h4 id="opera-with-watir-webdriver-1">Opera with watir-webdriver</h4>
+
+<div class="image-with-caption">
+  <p><img src="images/opera.png" alt="Opera on Ubuntu 11.04" /></p><p>Opera on Ubuntu 11.04</p>
+</div>
+
+<p>To drive <a href="http://www.opera.com/">Opera</a> make sure you have it installed.</p>
+
+<p>Let&#x2019;s see how it drives Opera. Open our old friend, IRB:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> $ <code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">rubygems</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 7</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 8</code> 
+<code class="lineno"> 9</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">opera</code>
+<code class="lineno">10</code> <code class="n">Selenium</code><code class="p">::</code><code class="n">WebDriver</code><code class="p">::</code><code class="n">Error</code><code class="p">::</code><code class="n">WebDriverError</code><code class="p">:</code> <code class="n">Unable</code> <code class="n">to</code> <code class="nb">find</code> <code class="n">the</code>
+<code class="lineno">11</code> <code class="n">Selenium</code> <code class="n">server</code> <code class="n">jar</code><code class="p">.</code> <code class="n">Please</code> <code class="n">download</code> <code class="n">the</code> <code class="n">standalone</code> <code class="n">server</code> <code class="n">from</code>
+<code class="lineno">12</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">selenium</code><code class="o">/</code><code class="n">downloads</code><code class="o">/</code><code class="n">list</code> <code class="n">and</code> <code class="n">set</code> <code class="n">the</code>
+<code class="lineno">13</code> <code class="n">SELENIUM_SERVER_JAR</code> <code class="n">environmental</code> <code class="n">variable</code> <code class="n">to</code> <code class="n">its</code> <code class="n">location</code><code class="p">.</code>
+<code class="lineno">14</code> <code class="n">More</code> <code class="n">info</code> <code class="n">at</code> <code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">code</code><code class="p">.</code><code class="n">google</code><code class="p">.</code><code class="n">com</code><code class="o">/</code><code class="n">p</code><code class="o">/</code><code class="n">selenium</code><code class="o">/</code><code class="n">wiki</code><code class="o">/</code><code class="n">OperaDriver</code><code class="p">.</code>
+<code class="lineno">15</code> <code class="p">(...)</code>
+</pre></div>
+
+</div>
+
+<p>Error message similar to the one when we first tried to open Chrome. The solution is similar too. We have to download a file, put it somewhere and point a variable to it. Do not worry, it sounds more complicated than it really is. Fortunately again, the error message says it all. Go to <em>http://code.google.com/p/selenium/downloads/list</em> and download <code>selenium-server-standalone-2.5.0.jar</code> (or newer version, the description should be <em>Use this if you want to use the Selenium RC or Remote WebDriver or use Grid 2 without needing any additional dependencies</em>). Since I have put <code>chromedriver</code> file in <code>/home/zeljko/bin</code>, I will put this file there too.</p>
+
+<p>The last step is setting <code>SELENIUM_SERVER_JAR</code> environmental variable. If you just got lost, I have step by step guide how to do it. Open Nautilus and go to your home folder: <em>Places &gt; Home Folder</em>. You want to edit <code>.bashrc</code> file, but by default files that have names starting with dot are not displayed. To see the file go to <em>View &gt; Show Hidden Files</em>. Doubleclick <code>.bashrc</code> file (it will open the file in <em>gedit</em> editor). Add this line to the file:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">export</code> <code class="n">SELENIUM_SERVER_JAR</code><code class="p">=</code><code class="o">~/</code><code class="n">bin</code><code class="o">/</code><code class="n">selenium</code><code class="o">-</code><code class="n">server</code><code class="o">-</code><code class="n">standalone</code><code class="o">-</code>2<code class="p">.</code>5<code class="p">.</code>0<code class="p">.</code><code class="n">jar</code>
+</pre></div>
+
+</div>
+
+<p>Save the file and close all Terminal windows. Open Terminal again. To check if the variable is set, try <code>printenv | grep SELENIUM</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> $ <code class="n">printenv</code> <code class="o">|</code> <code class="n">grep</code> <code class="n">SELENIUM</code>
+<code class="lineno">2</code> <code class="n">SELENIUM_SERVER_JAR</code><code class="p">=</code><code class="o">/</code><code class="n">home</code><code class="o">/</code><code class="n">zeljko</code><code class="o">/</code><code class="n">bin</code><code class="o">/</code><code class="n">selenium</code><code class="o">-</code><code class="n">server</code><code class="o">-</code><code class="n">standalone</code><code class="o">-</code>2<code class="p">.</code>5<code class="p">.</code>0<code class="p">.</code><code class="n">jar</code>
+</pre></div>
+
+</div>
+
+<p>Looks good to me!  After all this work, enjoy driving Opera:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno"> 1</code> $ <code class="n">irb</code>
+<code class="lineno"> 2</code> 
+<code class="lineno"> 3</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">rubygems</code>"
+<code class="lineno"> 4</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 5</code> 
+<code class="lineno"> 6</code> <code class="o">&gt;</code> <code class="n">require</code> "<code class="n">watir</code><code class="o">-</code><code class="n">webdriver</code>"
+<code class="lineno"> 7</code> <code class="p">=</code><code class="o">&gt;</code> <code class="n">true</code>
+<code class="lineno"> 8</code> 
+<code class="lineno"> 9</code> <code class="o">&gt;</code> <code class="n">browser</code> <code class="p">=</code> <code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">.</code><code class="n">new</code> <code class="p">:</code><code class="n">opera</code>
+<code class="lineno">10</code> <code class="p">=</code><code class="o">&gt;</code> #<code class="o">&lt;</code><code class="n">Watir</code><code class="p">::</code><code class="n">Browser</code><code class="p">:</code>0<code class="n">x</code><code class="p">..</code><code class="n">fb72fd854</code> <code class="n">url</code><code class="p">=</code>"<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">watir</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>" <code class="n">title</code><code class="p">=</code>"<code class="n">Watir</code>"<code class="o">&gt;</code>
+<code class="lineno">11</code> 
+<code class="lineno">12</code> <code class="o">&gt;</code> <code class="n">browser</code><code class="p">.</code><code class="n">goto</code> "<code class="n">watir</code><code class="p">.</code><code class="n">com</code>"
+<code class="lineno">13</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">http</code><code class="p">:</code><code class="o">//</code><code class="n">watir</code><code class="p">.</code><code class="n">com</code><code class="o">/</code>"
+</pre></div>
+
+</div>
+
+<div class="image-with-caption">
+  <p><img src="images/webdriver-opera.png" alt="Watir-webdriver drives Opera on Ubuntu 11.04" /></p><p>Watir-webdriver drives Opera on Ubuntu 11.04</p>
+</div>
+</div>
+<div id="leanpub-toc">
+<h2>Table of Contents</h2>
+<ol class="toc">
+<li class="chapter"><a href="chap00.html#license">License</a></li>
+<li class="chapter"><a href="chap01.html#about-the-book">About the Book</a></li>
+<li class="chapter"><a href="chap02.html#prerequisites">Prerequisites</a></li>
+<li class="chapter"><a href="chap03.html#about-watir">About Watir</a></li>
+<li class="section"><a href="chap03.html#what-can-it-do">What can it do?</a></li>
+<li class="section"><a href="chap03.html#what-it-can-not-do">What it can not do?</a></li>
+<li class="section"><a href="chap03.html#recorders">Recorders</a></li>
+<li class="section"><a href="chap03.html#gems">Gems</a></li>
+<li class="section"><a href="chap03.html#alternatives">Alternatives</a></li>
+<li class="chapter"><a href="chap04.html#installation">Installation</a></li>
+<li class="section"><a href="chap04.html#windows-7-vista-and-xp">Windows 7, Vista and XP</a></li>
+<li class="section"><a href="chap04.html#mac-os-x-108-107-106-and-105">Mac OS X 10.8, 10.7, 10.6 and 10.5</a></li>
+<li class="section"><a href="chap04.html#ubuntu-linux-1104">Ubuntu Linux 11.04</a></li>
+<li class="chapter"><a href="chap05.html#watir-in-five-minutes">Watir in Five Minutes</a></li>
+<li class="chapter"><a href="chap06.html#html-elements-supported-by-watir">HTML Elements Supported by Watir</a></li>
+<li class="chapter"><a href="chap07.html#link">Link</a></li>
+<li class="section"><a href="chap07.html#html-tag">HTML tag</a></li>
+<li class="section"><a href="chap07.html#text">Text</a></li>
+<li class="section"><a href="chap07.html#href">Href</a></li>
+<li class="section"><a href="chap07.html#url">URL</a></li>
+<li class="section"><a href="chap07.html#id">ID</a></li>
+<li class="section"><a href="chap07.html#name">Name</a></li>
+<li class="section"><a href="chap07.html#class">Class</a></li>
+<li class="section"><a href="chap07.html#title">Title</a></li>
+<li class="section"><a href="chap07.html#index">Index</a></li>
+<li class="section"><a href="chap07.html#after">After</a></li>
+<li class="section"><a href="chap07.html#html">HTML</a></li>
+<li class="section"><a href="chap07.html#css">CSS</a></li>
+<li class="section"><a href="chap07.html#xpath">XPath</a></li>
+<li class="section"><a href="chap07.html#multiple-attributes">Multiple Attributes</a></li>
+<li class="section"><a href="chap07.html#collection">Collection</a></li>
+<li class="chapter"><a href="chap08.html#img">Img</a></li>
+<li class="section"><a href="chap08.html#src">Src</a></li>
+<li class="section"><a href="chap08.html#alt">Alt</a></li>
+<li class="chapter"><a href="chap09.html#button">Button</a></li>
+<li class="chapter"><a href="chap10.html#checkbox">Checkbox</a></li>
+<li class="section"><a href="chap10.html#click">Click</a></li>
+<li class="section"><a href="chap10.html#set">Set</a></li>
+<li class="section"><a href="chap10.html#clear">Clear</a></li>
+<li class="chapter"><a href="chap11.html#radio">Radio</a></li>
+<li class="section"><a href="chap11.html#click-1">Click</a></li>
+<li class="section"><a href="chap11.html#set-1">Set</a></li>
+<li class="section"><a href="chap11.html#clear-1">Clear</a></li>
+<li class="chapter"><a href="chap12.html#collections">Collections</a></li>
+<li class="chapter"><a href="chap13.html#nested-elements">Nested Elements</a></li>
+<li class="section"><a href="chap13.html#simple-nesting">Simple Nesting</a></li>
+<li class="section"><a href="chap13.html#more-nesting">More nesting</a></li>
+<li class="chapter"><a href="chap14.html#about-watir-extended-version">About Watir, Extended Version</a></li>
+<li class="section"><a href="chap14.html#history">History</a></li>
+<li class="section"><a href="chap14.html#today">Today</a></li>
+<li class="section"><a href="chap14.html#future">Future</a></li>
+</ol>
+</div>
+</body>
+</html>

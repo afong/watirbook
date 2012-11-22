@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Img</title>
+<link href="stylesheet.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="leanpub-main">
+<h2 id="img">Img</h2>
+
+<p>
+  <em>You do not need internet access if you want to follow examples in this chapter. All examples in this chapter are tried on Mac OS 10.7.2, Firefox 8.0.1 Ruby 1.9.3p0, RubyGems 1.8.12 and watir-webdriver 0.3.9.</em>
+</p>
+
+<p>Did you read <em>Link</em> chapter? If you did not, please read it first. I explained a lot of basics there. If you did read it, good job. Continue with the good work.</p>
+
+<p><code>&lt;img&gt;</code> tag represents image on the HTML page. It&#x2019;s HTML can look like this:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&lt;</code><code class="n">img</code> <code class="n">src</code><code class="p">=</code>"<code class="n">click</code><code class="o">-</code><code class="n">me</code><code class="p">.</code><code class="n">png</code>"<code class="o">&gt;</code>
+</pre></div>
+
+</div>
+
+<p>You can access the image with one of the following:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">browser</code><code class="p">.</code><code class="n">img</code><code class="p">(</code><code class="n">how</code><code class="p">,</code> <code class="n">what</code><code class="p">)</code>
+<code class="lineno">2</code> <code class="n">browser</code><code class="p">.</code><code class="n">image</code><code class="p">(</code><code class="n">how</code><code class="p">,</code> <code class="n">what</code><code class="p">)</code>
+</pre></div>
+
+</div>
+
+<p>The <em>how</em> part can be (alphabetically): <code>after?</code>, <code>alt</code>, <code>class</code>, <code>css</code>, <code>html</code>, <code>id</code>, <code>index</code>, <code>name</code>, <code>src</code>, <code>title</code>, <code>xpath</code> and multiple attributes.</p>
+
+<p>To make sure you could do the exercises from this chapter even without internet access, create a simple HTML file with only one image in it. Open your favorite text editor, enter the following line in it and save it as <code>img.htm</code>:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&lt;</code><code class="n">img</code> <code class="n">id</code><code class="p">=</code>"<code class="n">click</code><code class="o">-</code><code class="n">me</code>" <code class="n">src</code><code class="p">=</code>"<code class="n">red</code><code class="p">.</code><code class="n">png</code>"
+<code class="lineno">2</code> <code class="n">onclick</code><code class="p">=</code>"<code class="n">document</code><code class="p">.</code><code class="n">getElementById</code><code class="p">(</code><code class="s">'click-me'</code><code class="p">).</code><code class="n">src</code><code class="p">=</code><code class="s">'green.png'</code><code class="p">;</code>"<code class="o">&gt;</code>
+</pre></div>
+
+</div>
+
+<p>The <code>onclick</code> part makes sure the image changes when clicked, so you can see if the code you are trying out actually works.</p>
+
+<p>Open IRB, require watir-webdriver, open the browser and open <code>img.htm</code>. If you do not know how to do that, please read <em>Link</em> chapter. I have explained it there. Since I have also gone into great detail there how to access links, I will assume that you are familiar with all that stuff, and here I will just talk about things that are different for images. Take a look at <em>Img</em> table in <em>Reference</em> chapter for more examples.</p>
+
+<h3 id="src">Src</h3>
+
+<p>All images have <code>src</code> attribute, and you can use it to access the image.</p>
+
+<p>If you know the entire value of <code>src</code> attribute, use string to click it:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">browser</code><code class="p">.</code><code class="n">img</code><code class="p">(:</code><code class="n">src</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">red</code><code class="p">.</code><code class="n">png</code>"<code class="p">).</code><code class="n">click</code>
+</pre></div>
+
+</div>
+
+<p>If you know the portion of value of <code>src</code> attribute, use regular expression to click it:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">browser</code><code class="p">.</code><code class="n">img</code><code class="p">(:</code><code class="n">src</code> <code class="p">=</code><code class="o">&gt;</code> <code class="o">/</code><code class="n">red</code><code class="o">/</code><code class="p">).</code><code class="n">click</code>
+</pre></div>
+
+</div>
+
+<h3 id="alt">Alt</h3>
+
+<p>It is very common for an image element to have <code>alt</code> attribute. Change <code>img.htm</code> to this, save the file and reload the page in the browser:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="o">&lt;</code><code class="n">img</code> <code class="n">id</code><code class="p">=</code>"<code class="n">click</code><code class="o">-</code><code class="n">me</code>" <code class="n">src</code><code class="p">=</code>"<code class="n">red</code><code class="p">.</code><code class="n">png</code>" <code class="n">alt</code><code class="p">=</code>"<code class="n">red</code> <code class="n">image</code>"
+<code class="lineno">2</code> <code class="n">onclick</code><code class="p">=</code>"<code class="n">document</code><code class="p">.</code><code class="n">getElementById</code><code class="p">(</code><code class="s">'click-me'</code><code class="p">).</code><code class="n">src</code><code class="p">=</code><code class="s">'red.png'</code><code class="p">;</code>"<code class="o">&gt;</code>
+</pre></div>
+
+</div>
+
+<p>If you know the entire value of <code>alt</code> attribute, use string to click it:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">browser</code><code class="p">.</code><code class="n">img</code><code class="p">(:</code><code class="n">alt</code> <code class="p">=</code><code class="o">&gt;</code> "<code class="n">red</code> <code class="n">image</code>"<code class="p">).</code><code class="n">click</code>
+</pre></div>
+
+</div>
+
+<p>If you know the portion of value of <code>alt</code> attribute, use regular expression to click it:</p>
+
+<div class="code-block">
+<div class="highlight"><pre><code class="lineno">1</code> <code class="n">browser</code><code class="p">.</code><code class="n">img</code><code class="p">(:</code><code class="n">alt</code> <code class="p">=</code><code class="o">&gt;</code> <code class="o">/</code><code class="n">red</code><code class="o">/</code><code class="p">).</code><code class="n">click</code>
+</pre></div>
+
+</div>
+</div>
+<div id="leanpub-toc">
+<h2>Table of Contents</h2>
+<ol class="toc">
+<li class="chapter"><a href="chap00.html#license">License</a></li>
+<li class="chapter"><a href="chap01.html#about-the-book">About the Book</a></li>
+<li class="chapter"><a href="chap02.html#prerequisites">Prerequisites</a></li>
+<li class="chapter"><a href="chap03.html#about-watir">About Watir</a></li>
+<li class="section"><a href="chap03.html#what-can-it-do">What can it do?</a></li>
+<li class="section"><a href="chap03.html#what-it-can-not-do">What it can not do?</a></li>
+<li class="section"><a href="chap03.html#recorders">Recorders</a></li>
+<li class="section"><a href="chap03.html#gems">Gems</a></li>
+<li class="section"><a href="chap03.html#alternatives">Alternatives</a></li>
+<li class="chapter"><a href="chap04.html#installation">Installation</a></li>
+<li class="section"><a href="chap04.html#windows-7-vista-and-xp">Windows 7, Vista and XP</a></li>
+<li class="section"><a href="chap04.html#mac-os-x-108-107-106-and-105">Mac OS X 10.8, 10.7, 10.6 and 10.5</a></li>
+<li class="section"><a href="chap04.html#ubuntu-linux-1104">Ubuntu Linux 11.04</a></li>
+<li class="chapter"><a href="chap05.html#watir-in-five-minutes">Watir in Five Minutes</a></li>
+<li class="chapter"><a href="chap06.html#html-elements-supported-by-watir">HTML Elements Supported by Watir</a></li>
+<li class="chapter"><a href="chap07.html#link">Link</a></li>
+<li class="section"><a href="chap07.html#html-tag">HTML tag</a></li>
+<li class="section"><a href="chap07.html#text">Text</a></li>
+<li class="section"><a href="chap07.html#href">Href</a></li>
+<li class="section"><a href="chap07.html#url">URL</a></li>
+<li class="section"><a href="chap07.html#id">ID</a></li>
+<li class="section"><a href="chap07.html#name">Name</a></li>
+<li class="section"><a href="chap07.html#class">Class</a></li>
+<li class="section"><a href="chap07.html#title">Title</a></li>
+<li class="section"><a href="chap07.html#index">Index</a></li>
+<li class="section"><a href="chap07.html#after">After</a></li>
+<li class="section"><a href="chap07.html#html">HTML</a></li>
+<li class="section"><a href="chap07.html#css">CSS</a></li>
+<li class="section"><a href="chap07.html#xpath">XPath</a></li>
+<li class="section"><a href="chap07.html#multiple-attributes">Multiple Attributes</a></li>
+<li class="section"><a href="chap07.html#collection">Collection</a></li>
+<li class="chapter"><a href="chap08.html#img">Img</a></li>
+<li class="section"><a href="chap08.html#src">Src</a></li>
+<li class="section"><a href="chap08.html#alt">Alt</a></li>
+<li class="chapter"><a href="chap09.html#button">Button</a></li>
+<li class="chapter"><a href="chap10.html#checkbox">Checkbox</a></li>
+<li class="section"><a href="chap10.html#click">Click</a></li>
+<li class="section"><a href="chap10.html#set">Set</a></li>
+<li class="section"><a href="chap10.html#clear">Clear</a></li>
+<li class="chapter"><a href="chap11.html#radio">Radio</a></li>
+<li class="section"><a href="chap11.html#click-1">Click</a></li>
+<li class="section"><a href="chap11.html#set-1">Set</a></li>
+<li class="section"><a href="chap11.html#clear-1">Clear</a></li>
+<li class="chapter"><a href="chap12.html#collections">Collections</a></li>
+<li class="chapter"><a href="chap13.html#nested-elements">Nested Elements</a></li>
+<li class="section"><a href="chap13.html#simple-nesting">Simple Nesting</a></li>
+<li class="section"><a href="chap13.html#more-nesting">More nesting</a></li>
+<li class="chapter"><a href="chap14.html#about-watir-extended-version">About Watir, Extended Version</a></li>
+<li class="section"><a href="chap14.html#history">History</a></li>
+<li class="section"><a href="chap14.html#today">Today</a></li>
+<li class="section"><a href="chap14.html#future">Future</a></li>
+</ol>
+</div>
+</body>
+</html>
